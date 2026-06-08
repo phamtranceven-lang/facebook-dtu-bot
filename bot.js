@@ -8,7 +8,7 @@ const PAGES = [
   { name: "Duy Tan University", url: "https://www.facebook.com/Duy.Tan.University" },
   { name: "Tuyển sinh Đại học Duy Tân", url: "https://www.facebook.com/tuyensinhDTU" },
   {
-    name: "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
+    name: "DTU -Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
     url: "https://www.facebook.com/truongkhoahocmaytinh",
   },
   {
