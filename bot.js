@@ -617,36 +617,84 @@ async function sendPost(post, testMode) {
   const linkedTime =
     '<a href="' + escapeHtml(post.url) + '">' + escapeHtml(linkedTimeText) + "</a>";
 
-  let messageId = null;
+  const mainChatId = process.env.TELEGRAM_CHAT_ID;
+  const priorityChatId = String(process.env.TELEGRAM_PRIORITY_CHAT_ID || "").trim();
 
-  if (post.imageUrl) {
-    const caption = buildPostMessage(post, title, linkedTime, linkedTimeText, CAPTION_MAX);
-    try {
-      messageId = await sendPhoto(post.imageUrl, caption);
-    } catch (error) {
-      console.warn("Không gửi được ảnh, chuyển sang text:", error instanceof Error ? error.message : error);
-      const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
-      messageId = await sendText(text, false);
-    }
-  } else {
-    const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
-    messageId = await sendText(text, false);
-  }
+  const messageId = await sendPostToChat({
+    chatId: mainChatId,
+    post,
+    title,
+    linkedTime,
+    linkedTimeText,
+  });
 
   let pinned = false;
   let pinError = null;
 
   if (priority && messageId) {
     try {
-      await pinMessage(messageId);
+      await pinMessage(mainChatId, messageId);
       pinned = true;
     } catch (error) {
       pinError = error instanceof Error ? error.message : String(error);
-      console.error("Không ghim được bài:", pinError);
+      console.error("Không ghim được bài ở kênh chính:", pinError);
     }
   }
 
-  return { messageId, priority, matchedPinKeywords, pinned, pinError };
+  let prioritySent = false;
+  let priorityPinned = false;
+  let priorityError = null;
+
+  // Nếu có bài quan trọng, gửi thêm qua chat cá nhân/nhóm riêng.
+  // Lưu ý: Telegram Bot API không gửi private message bằng @username thường được;
+  // phải dùng chat_id dạng số, ví dụ lấy qua getUpdates sau khi user /start bot.
+  if (priority && priorityChatId) {
+    try {
+      const priorityMessageId = await sendPostToChat({
+        chatId: priorityChatId,
+        post,
+        title,
+        linkedTime,
+        linkedTimeText,
+      });
+      prioritySent = Boolean(priorityMessageId);
+
+      if (priorityMessageId) {
+        await pinMessage(priorityChatId, priorityMessageId);
+        priorityPinned = true;
+      }
+    } catch (error) {
+      priorityError = error instanceof Error ? error.message : String(error);
+      console.error("Không gửi/ghim được bài quan trọng sang chat riêng:", priorityError);
+    }
+  }
+
+  return {
+    messageId,
+    priority,
+    matchedPinKeywords,
+    pinned,
+    pinError,
+    prioritySent,
+    priorityPinned,
+    priorityError,
+  };
+}
+
+async function sendPostToChat({ chatId, post, title, linkedTime, linkedTimeText }) {
+  if (post.imageUrl) {
+    const caption = buildPostMessage(post, title, linkedTime, linkedTimeText, CAPTION_MAX);
+    try {
+      return await sendPhoto(chatId, post.imageUrl, caption);
+    } catch (error) {
+      console.warn("Không gửi được ảnh, chuyển sang text:", error instanceof Error ? error.message : error);
+      const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
+      return await sendText(chatId, text, false);
+    }
+  }
+
+  const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
+  return await sendText(chatId, text, false);
 }
 
 function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
@@ -778,13 +826,13 @@ function normalizeForSearch(value) {
     .toLowerCase();
 }
 
-async function sendPhoto(photoUrl, caption) {
+async function sendPhoto(chatId, photoUrl, caption) {
   const endpoint = telegramEndpoint("sendPhoto");
   const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_CHAT_ID,
+      chat_id: chatId,
       photo: photoUrl,
       caption,
       parse_mode: "HTML",
@@ -799,12 +847,12 @@ async function sendPhoto(photoUrl, caption) {
   return result.result?.message_id || null;
 }
 
-async function sendText(text, disablePreview) {
+async function sendText(chatId, text, disablePreview) {
   const response = await fetch(telegramEndpoint("sendMessage"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_CHAT_ID,
+      chat_id: chatId,
       text,
       parse_mode: "HTML",
       disable_web_page_preview: Boolean(disablePreview),
@@ -819,12 +867,12 @@ async function sendText(text, disablePreview) {
   return result.result?.message_id || null;
 }
 
-async function pinMessage(messageId) {
+async function pinMessage(chatId, messageId) {
   const response = await fetch(telegramEndpoint("pinChatMessage"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_CHAT_ID,
+      chat_id: chatId,
       message_id: messageId,
       disable_notification: true,
     }),
