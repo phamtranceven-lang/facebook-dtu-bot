@@ -182,10 +182,16 @@ async function scrapeFacebookPage(context, target, pageIndex) {
     await dismissFacebookOverlays(page);
     await page.waitForTimeout(4500);
 
+    // Mở trước các nút "Xem thêm" của Facebook để lấy được full caption,
+    // tránh gửi chữ "Xem thêm" giả sang Telegram nhưng không có nội dung để bung ra.
+    await expandFacebookSeeMore(page);
+
     await page.evaluate(() => window.scrollTo(0, Math.min(document.body.scrollHeight, 1800)));
     await page.waitForTimeout(2200);
+    await expandFacebookSeeMore(page);
     await page.evaluate(() => window.scrollTo(0, 300));
     await page.waitForTimeout(800);
+    await expandFacebookSeeMore(page);
 
     const rawPosts = await page.evaluate(({ targetName, targetUrl, postsPerPage, pageIndex }) => {
       const articleElements = Array.from(document.querySelectorAll('div[role="article"]'));
@@ -380,6 +386,52 @@ async function scrapeFacebookPage(context, target, pageIndex) {
   }
 }
 
+
+async function expandFacebookSeeMore(page) {
+  for (let round = 0; round < 4; round += 1) {
+    const clicked = await page.evaluate(() => {
+      const isReadMoreText = (value) => {
+        const text = String(value || "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
+
+        return text === "xem thêm" || text === "see more";
+      };
+
+      const candidates = Array.from(
+        document.querySelectorAll('div[role="button"], span[role="button"], a[role="button"], button, a, span')
+      );
+
+      let count = 0;
+      const clickedNodes = new Set();
+
+      for (const node of candidates) {
+        const text = node.innerText || node.textContent || "";
+        if (!isReadMoreText(text)) continue;
+
+        const clickable =
+          node.closest('div[role="button"], span[role="button"], a[role="button"], button, a') || node;
+
+        if (clickedNodes.has(clickable)) continue;
+        clickedNodes.add(clickable);
+
+        try {
+          clickable.click();
+          count += 1;
+        } catch {
+          // Bỏ qua nếu Facebook chặn click trên node này.
+        }
+      }
+
+      return count;
+    });
+
+    if (!clicked) break;
+    await page.waitForTimeout(700);
+  }
+}
+
 async function dismissFacebookOverlays(page) {
   const labels = [
     "Allow all cookies",
@@ -481,6 +533,14 @@ function isBadFacebookUiLine(line) {
   return false;
 }
 
+
+function stripFacebookReadMoreMarker(value) {
+  return String(value || "")
+    .replace(/(?:\s|^)(?:…|\.\.\.)?\s*(xem thêm|see more)\s*$/gi, "")
+    .replace(/(?:\s|^)(xem thêm|see more)\s*$/gi, "")
+    .trim();
+}
+
 function cleanFacebookText(value, author) {
   const authorSearch = normalizeForSearch(author);
 
@@ -494,7 +554,14 @@ function cleanFacebookText(value, author) {
     .filter((line) => normalizeForSearch(line) !== authorSearch)
     .filter((line) => !isBadFacebookUiLine(line));
 
-  const text = lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  const text = stripFacebookReadMoreMarker(
+    lines
+      .map((line) => stripFacebookReadMoreMarker(line))
+      .filter(Boolean)
+      .join("\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim()
+  );
 
   return text || "Bài viết không có nội dung chữ.";
 }
