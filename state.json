@@ -1,5 +1,12 @@
 {
-  "initialized": false,
-  "ids": [],
-  "updatedAt": null
+  "initialized": true,
+  "ids": [
+    "4fd54abd7f47424790ac8fb1",
+    "bdbde84fbc8b7313528c1966",
+    "c12d847cc7b67d6f5b2ff3fe",
+    "1658459aa764344cfb4d666c",
+    "9d64f33843bc9a3094bfc8c9",
+    "db3a581c7f17abf31347b0b0"
+  ],
+  "updatedAt": "2026-06-08T16:46:10.366Z"
 }
