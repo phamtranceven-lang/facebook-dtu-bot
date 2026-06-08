@@ -203,18 +203,63 @@ async function scrapeFacebookPage(context, target, pageIndex) {
         "see more",
         "all reactions",
         "tất cả cảm xúc",
+        "tất cả cảm xúc:",
+        "most relevant is selected, so some comments may have been filtered out.",
       ]);
+
+      function isBadUiLine(line) {
+        const text = String(line || "").trim();
+        const value = text.toLowerCase();
+        if (!value) return true;
+        if (badTextLines.has(value)) return true;
+        if (value.includes("tất cả cảm xúc")) return true;
+        if (/^[·•.\-–—:]+$/.test(value)) return true;
+
+        // Các dòng UI/metadata của Facebook hay bị lẫn vào caption khi scrape public page.
+        if (/^(vừa xong|just now|hôm qua|yesterday|đã chỉnh sửa|edited)$/.test(value)) return true;
+        if (/^\d+\s*(giây|phút|giờ|ngày|tuần|tháng|năm|second|seconds|minute|minutes|hour|hours|day|days|week|weeks|month|months|year|years)$/.test(value)) return true;
+        if (/^\d+\s*(giây|phút|giờ|ngày|tuần|tháng|năm)\s*trước$/.test(value)) return true;
+        if (/^\d+\s*(lượt xem|views?|bình luận|comments?|chia sẻ|shares?)$/.test(value)) return true;
+
+        // Reaction count thường hiện thành các dòng rời như 380 / 2 / 4 / +25.
+        if (/^\+?\d{1,6}([.,]\d+)?([kmb]|\s*(ngàn|nghìn|triệu))?$/.test(value)) return true;
+        return false;
+      }
 
       function normalizeText(value) {
         return String(value || "")
           .replace(/\r\n?/g, "\n")
           .split("\n")
           .map((line) => line.trim())
-          .filter(Boolean)
-          .filter((line) => !badTextLines.has(line.toLowerCase()))
+          .filter((line) => !isBadUiLine(line))
           .join("\n")
           .replace(/\n{3,}/g, "\n\n")
           .trim();
+      }
+
+      function findMessageText(article) {
+        // Ưu tiên đúng container nội dung bài viết, không lấy cả article.innerText
+        // vì article.innerText lẫn ngày đăng, reaction count, comment/share.
+        const selectors = [
+          '[data-ad-comet-preview="message"]',
+          '[data-ad-preview="message"]',
+          'div[data-ad-comet-preview="message"]',
+          'div[data-ad-preview="message"]',
+        ];
+
+        const candidates = [];
+        for (const selector of selectors) {
+          for (const node of Array.from(article.querySelectorAll(selector))) {
+            const text = normalizeText(node.innerText || node.textContent || "");
+            if (text.length >= 8) candidates.push(text);
+          }
+        }
+
+        if (candidates.length > 0) {
+          return candidates.sort((a, b) => b.length - a.length)[0];
+        }
+
+        return normalizeText(article.innerText || article.textContent || "");
       }
 
       function canonicalize(rawHref) {
@@ -295,7 +340,7 @@ async function scrapeFacebookPage(context, target, pageIndex) {
         const url = findPostUrl(article);
         if (!url || seenUrls.has(url)) continue;
 
-        const text = normalizeText(article.innerText || article.textContent || "");
+        const text = findMessageText(article);
         if (!text || text.length < 8) continue;
 
         seenUrls.add(url);
@@ -405,17 +450,51 @@ function normalizeSameSite(value) {
   return "Lax";
 }
 
+function isBadFacebookUiLine(line) {
+  const text = String(line || "").trim();
+  const value = normalizeForSearch(text);
+  if (!value) return true;
+
+  const exactBad = new Set([
+    "thich",
+    "binh luan",
+    "chia se",
+    "like",
+    "comment",
+    "share",
+    "xem them",
+    "see more",
+    "all reactions",
+    "tat ca cam xuc",
+    "tat ca cam xuc:",
+  ]);
+
+  if (exactBad.has(value)) return true;
+  if (value.includes("tat ca cam xuc")) return true;
+  if (/^[·•.\-–—:]+$/.test(text)) return true;
+  if (/^(vua xong|just now|hom qua|yesterday|da chinh sua|edited)$/.test(value)) return true;
+  if (/^\d+\s*(giay|phut|gio|ngay|tuan|thang|nam|second|seconds|minute|minutes|hour|hours|day|days|week|weeks|month|months|year|years)$/.test(value)) return true;
+  if (/^\d+\s*(giay|phut|gio|ngay|tuan|thang|nam)\s*truoc$/.test(value)) return true;
+  if (/^\d+\s*(luot xem|views?|binh luan|comments?|chia se|shares?)$/.test(value)) return true;
+  if (/^\+?\d{1,6}([.,]\d+)?([kmb]|\s*(ngan|nghin|trieu))?$/.test(value)) return true;
+
+  return false;
+}
+
 function cleanFacebookText(value, author) {
-  let text = String(value || "")
+  const authorSearch = normalizeForSearch(author);
+
+  const lines = String(value || "")
     .replace(/\r\n?/g, "\n")
     .replace(/[\t ]+/g, " ")
     .replace(/ *\n */g, "\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => normalizeForSearch(line) !== authorSearch)
+    .filter((line) => !isBadFacebookUiLine(line));
 
-  if (text.startsWith(author + "\n")) {
-    text = text.slice(author.length + 1).trim();
-  }
+  const text = lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 
   return text || "Bài viết không có nội dung chữ.";
 }
