@@ -5,6 +5,7 @@ on:
     # UTC: 00:17, 04:17, 08:17, 12:17
     # Việt Nam: 07:17, 11:17, 15:17, 19:17
     - cron: "17 0,4,8,12 * * *"
+
   workflow_dispatch:
     inputs:
       mode:
@@ -48,12 +49,13 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_PRIORITY_CHAT_ID: ${{ secrets.TELEGRAM_PRIORITY_CHAT_ID }}
           FACEBOOK_COOKIES_JSON: ${{ secrets.FACEBOOK_COOKIES_JSON }}
           BOT_MODE: ${{ github.event.inputs.mode || 'normal' }}
         run: node bot.js
 
       - name: Save state.json
-        if: ${{ always() && github.event.inputs.mode != 'test3' }}
+        if: ${{ always() && (github.event_name != 'workflow_dispatch' || github.event.inputs.mode != 'test3') }}
         run: |
           if git diff --quiet -- state.json; then
             echo "state.json không thay đổi."
