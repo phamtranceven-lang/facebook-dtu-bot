@@ -1,0 +1,76 @@
+name: Facebook DTU Telegram Bot
+
+on:
+  schedule:
+    # UTC: 00:17, 04:17, 08:17, 12:17
+    # Việt Nam: 07:17, 11:17, 15:17, 19:17
+    - cron: "17 0,4,8,12 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "normal = kiểm tra bài mới; test3 = gửi thử tối đa 3 bài"
+        required: true
+        default: "normal"
+        type: choice
+        options:
+          - normal
+          - test3
+
+permissions:
+  contents: write
+
+concurrency:
+  group: facebook-dtu-telegram-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Run bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FACEBOOK_COOKIES_JSON: ${{ secrets.FACEBOOK_COOKIES_JSON }}
+          BOT_MODE: ${{ github.event.inputs.mode || 'normal' }}
+        run: node bot.js
+
+      - name: Save state.json
+        if: ${{ always() && github.event.inputs.mode != 'test3' }}
+        run: |
+          if git diff --quiet -- state.json; then
+            echo "state.json không thay đổi."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git commit -m "Update Facebook bot state"
+          git push
+
+      - name: Upload debug files when Facebook returns no posts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: facebook-debug-${{ github.run_number }}
+          path: debug/
+          if-no-files-found: ignore
+          retention-days: 3
