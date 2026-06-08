@@ -60,7 +60,7 @@ const STATE_FILE = path.resolve("state.json");
 const DEBUG_DIR = path.resolve("debug");
 const MAX_SEEN = 500;
 const POSTS_PER_PAGE = 5;
-const CAPTION_MAX = 1000;
+const CAPTION_MAX = 1024;
 const TEXT_MAX = 3800;
 const BOT_MODE = String(process.env.BOT_MODE || "normal").toLowerCase();
 
@@ -569,7 +569,7 @@ async function sendPost(post, testMode) {
   let pinned = false;
   let pinError = null;
 
-  if (!testMode && priority && messageId) {
+  if (priority && messageId) {
     try {
       await pinMessage(messageId);
       pinned = true;
@@ -583,58 +583,118 @@ async function sendPost(post, testMode) {
 }
 
 function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
-  const fullText = String(post.text || "").trim() || "Bài viết không có nội dung chữ.";
-  const fixedLength = visibleLength(title) + 4 + visibleLength(linkedTimeText);
+  const fullText = normalizePostText(
+    String(post.text || "").trim() || "Bài viết không có nội dung chữ."
+  );
+
+  // Dòng thời gian chính là link mở bài Facebook và luôn nằm cuối caption.
+  // Chỉ chừa đủ ký tự cho tiêu đề, khoảng cách và dòng thời gian.
+  const footerHtml = linkedTime;
+  const footerVisibleLength = visibleLength(linkedTimeText);
+
+  const fixedLength =
+    visibleLength(title) +
+    2 + // sau tiêu đề bot
+    2 + // trước footer
+    footerVisibleLength;
+
   const contentBudget = Math.max(1, maxLength - fixedLength);
 
+  // Chỉ để dòng đầu tiên hiện sẵn.
+  // Toàn bộ nội dung còn lại nằm trong blockquote expandable của Telegram.
   const firstLineBreak = fullText.indexOf("\n");
-  let firstLine = firstLineBreak >= 0 ? fullText.slice(0, firstLineBreak).trim() : fullText.trim();
-  let hiddenContent = firstLineBreak >= 0 ? fullText.slice(firstLineBreak + 1).trim() : "";
+  let firstLine =
+    firstLineBreak >= 0
+      ? fullText.slice(0, firstLineBreak).trim()
+      : fullText.trim();
+  let hiddenContent =
+    firstLineBreak >= 0
+      ? fullText.slice(firstLineBreak + 1).trim()
+      : "";
 
-  const needsHidden = Boolean(hiddenContent) || visibleLength(firstLine) > contentBudget;
-  const firstLineBudget = Math.max(1, contentBudget - (needsHidden ? 3 : 0));
+  // Nếu riêng dòng đầu quá dài, phần vượt cũng chuyển xuống "Xem thêm".
+  const needsHidden =
+    Boolean(hiddenContent) || visibleLength(firstLine) > contentBudget;
+  const hiddenReserve = needsHidden ? 3 : 0;
+  const firstLineBudget = Math.max(1, contentBudget - hiddenReserve);
   const firstLineParts = splitAtBoundary(firstLine, firstLineBudget);
   firstLine = firstLineParts.head;
 
   if (firstLineParts.tail) {
-    hiddenContent = hiddenContent ? firstLineParts.tail + "\n" + hiddenContent : firstLineParts.tail;
+    hiddenContent = hiddenContent
+      ? firstLineParts.tail + "\n" + hiddenContent
+      : firstLineParts.tail;
   }
 
   let bodyHtml = escapeHtml(firstLine);
 
   if (hiddenContent) {
-    const hiddenBudget = Math.max(0, contentBudget - visibleLength(firstLine) - 2);
+    const separatorLength = 2;
+    const hiddenBudget = Math.max(
+      0,
+      contentBudget - visibleLength(firstLine) - separatorLength
+    );
+
     if (hiddenBudget > 0) {
       let hiddenText = hiddenContent;
+
       if (visibleLength(hiddenText) > hiddenBudget) {
-        hiddenText = splitAtBoundary(hiddenText, Math.max(0, hiddenBudget - 1)).head + "…";
+        const textBudget = Math.max(0, hiddenBudget - 1);
+        const hiddenParts = splitAtBoundary(hiddenText, textBudget);
+        hiddenText = hiddenParts.head + "…";
       }
-      bodyHtml += "\n\n<blockquote expandable>" + escapeHtml(hiddenText) + "</blockquote>";
+
+      bodyHtml +=
+        "\n\n<blockquote expandable>" +
+        escapeHtml(hiddenText) +
+        "</blockquote>";
     }
   }
 
-  return escapeHtml(title) + "\n\n" + bodyHtml + "\n\n" + linkedTime;
+  return escapeHtml(title) + "\n\n" + bodyHtml + "\n\n" + footerHtml;
+}
+
+function normalizePostText(value) {
+  return String(value || "")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\t ]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }
 
 function splitAtBoundary(value, maxLength) {
-  const chars = Array.from(String(value || "").trim());
-  if (chars.length <= maxLength) return { head: chars.join(""), tail: "" };
+  const text = String(value || "").trim();
+  if (visibleLength(text) <= maxLength) {
+    return { head: text, tail: "" };
+  }
 
-  const tentative = chars.slice(0, maxLength).join("");
-  const minimumCut = Math.floor(tentative.length * 0.55);
+  let cut = Math.min(maxLength, text.length);
+  const minimumCut = Math.floor(cut * 0.55);
+
   const candidates = [
-    tentative.lastIndexOf("\n\n"),
-    tentative.lastIndexOf("\n"),
-    tentative.lastIndexOf(". "),
-    tentative.lastIndexOf("! "),
-    tentative.lastIndexOf("? "),
-    tentative.lastIndexOf(", "),
-    tentative.lastIndexOf(" "),
+    text.lastIndexOf("\n\n", cut),
+    text.lastIndexOf("\n", cut),
+    text.lastIndexOf(". ", cut),
+    text.lastIndexOf("! ", cut),
+    text.lastIndexOf("? ", cut),
+    text.lastIndexOf(", ", cut),
+    text.lastIndexOf(" ", cut),
   ].filter((index) => index >= minimumCut);
 
-  const cut = candidates.length > 0 ? Math.max(...candidates) : tentative.length;
-  const full = chars.join("");
-  return { head: full.slice(0, cut).trim(), tail: full.slice(cut).trim() };
+  if (candidates.length > 0) {
+    cut = Math.max(...candidates);
+    if (/^[.!?,] /.test(text.slice(cut, cut + 2))) cut += 1;
+  }
+
+  return {
+    head: text.slice(0, cut).trim(),
+    tail: text.slice(cut).trim(),
+  };
+}
+
+function visibleLength(value) {
+  return Array.from(String(value || "")).length;
 }
 
 function getMatchedPinKeywords(post) {
