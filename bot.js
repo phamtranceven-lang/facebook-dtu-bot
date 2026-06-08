@@ -1,0 +1,705 @@
+import { chromium } from "playwright";
+import crypto from "node:crypto";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const PAGES = [
+  { name: "Đại học Duy Tân", url: "https://www.facebook.com/daihocduytan.dtu" },
+  { name: "Duy Tan University", url: "https://www.facebook.com/Duy.Tan.University" },
+  { name: "Tuyển sinh Đại học Duy Tân", url: "https://www.facebook.com/tuyensinhDTU" },
+  {
+    name: "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
+    url: "https://www.facebook.com/truongkhoahocmaytinh",
+  },
+  {
+    name: "Tuổi trẻ Trường Công nghệ - Đại học Duy Tân",
+    url: "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan",
+  },
+  {
+    name: "Tuổi trẻ Trường Kinh tế - Đại học Duy Tân",
+    url: "https://www.facebook.com/dtkt.dtu",
+  },
+  {
+    name: "Trường Du lịch - Đại học Duy Tân",
+    url: "https://www.facebook.com/DuyTanHTi",
+  },
+  {
+    name: "DTU - Trường Ngôn ngữ - Xã hội Nhân văn",
+    url: "https://www.facebook.com/ngoaingudaihocduytan",
+  },
+  {
+    name: "DTU - Khoa Khoa học Xã hội và Nhân văn",
+    url: "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan",
+  },
+  {
+    name: "Trường Y Dược - Đại học Duy Tân",
+    url: "https://www.facebook.com/TruongYDuocDHDT",
+  },
+  {
+    name: "DTU - Trường Đào tạo Quốc tế",
+    url: "https://www.facebook.com/DTU.InternationalSchool",
+  },
+  { name: "LCDKCK DTU", url: "https://www.facebook.com/LCDKCKDTU" },
+];
+
+const PIN_KEYWORDS = [
+  "thông báo",
+  "công văn",
+  "đánh giá",
+  "khai báo",
+  "đánh giá rèn luyện",
+  "điểm rèn luyện",
+  "kết quả rèn luyện",
+  "xếp loại rèn luyện",
+  "phiếu đánh giá rèn luyện",
+  "minh chứng rèn luyện",
+  "rèn luyện sinh viên",
+];
+
+const STATE_FILE = path.resolve("state.json");
+const DEBUG_DIR = path.resolve("debug");
+const MAX_SEEN = 500;
+const POSTS_PER_PAGE = 5;
+const CAPTION_MAX = 1000;
+const TEXT_MAX = 3800;
+const BOT_MODE = String(process.env.BOT_MODE || "normal").toLowerCase();
+
+async function main() {
+  needEnv(["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"]);
+  await fs.mkdir(DEBUG_DIR, { recursive: true });
+
+  const browser = await chromium.launch({ headless: true });
+  const context = await browser.newContext({
+    locale: "vi-VN",
+    timezoneId: "Asia/Ho_Chi_Minh",
+    viewport: { width: 1365, height: 1600 },
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+      "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+  });
+
+  await loadFacebookCookies(context);
+
+  const allPosts = [];
+  const pageErrors = [];
+
+  try {
+    for (let index = 0; index < PAGES.length; index += 1) {
+      const target = PAGES[index];
+      console.log(`\n[${index + 1}/${PAGES.length}] ${target.name}`);
+
+      try {
+        const posts = await scrapeFacebookPage(context, target, index);
+        allPosts.push(...posts);
+        console.log(`Tìm thấy ${posts.length} bài.`);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        pageErrors.push({ page: target.name, error: message });
+        console.error(`Lỗi ${target.name}:`, message);
+      }
+
+      if (index < PAGES.length - 1) await sleep(1500);
+    }
+  } finally {
+    await browser.close();
+  }
+
+  const posts = dedupe(allPosts);
+  console.log(`\nTổng số bài duy nhất: ${posts.length}`);
+
+  if (BOT_MODE === "test3") {
+    const testPosts = posts.slice(0, 3).reverse();
+    let sent = 0;
+
+    for (const post of testPosts) {
+      await sendPost(post, true);
+      sent += 1;
+      await sleep(1000);
+    }
+
+    console.log(`Đã gửi thử ${sent} bài. Không cập nhật state.json.`);
+    printSummary({ ok: sent > 0, mode: "test3", found: posts.length, sent, pageErrors });
+    return;
+  }
+
+  const state = await loadState();
+
+  if (!state.initialized) {
+    await saveState(posts.map((post) => post.id), true);
+    console.log("Đã khởi tạo state.json. Lần đầu không gửi bài cũ.");
+    printSummary({ ok: posts.length > 0, initialized: true, found: posts.length, sent: 0, pageErrors });
+    return;
+  }
+
+  const seen = new Set(state.ids);
+  const newPosts = posts.filter((post) => !seen.has(post.id)).reverse();
+
+  if (newPosts.length === 0) {
+    await saveState(state.ids.concat(posts.map((post) => post.id)), true);
+    console.log("Chưa có bài mới.");
+    printSummary({ ok: posts.length > 0 || pageErrors.length < PAGES.length, found: posts.length, sent: 0, pageErrors });
+    return;
+  }
+
+  const savedIds = state.ids.slice();
+  let sent = 0;
+  let pinned = 0;
+  const sendErrors = [];
+
+  for (const post of newPosts) {
+    try {
+      const result = await sendPost(post, false);
+      savedIds.push(post.id);
+      sent += 1;
+      if (result.pinned) pinned += 1;
+      await saveState(savedIds, true);
+      await sleep(1000);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      sendErrors.push({ page: post.author, url: post.url, error: message });
+      console.error("Không gửi được bài:", message);
+    }
+  }
+
+  printSummary({
+    ok: sendErrors.length === 0,
+    found: posts.length,
+    newPosts: newPosts.length,
+    sent,
+    pinned,
+    pageErrors,
+    sendErrors,
+  });
+}
+
+async function scrapeFacebookPage(context, target, pageIndex) {
+  const page = await context.newPage();
+  page.setDefaultTimeout(15000);
+  page.setDefaultNavigationTimeout(45000);
+
+  try {
+    await page.goto(target.url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await dismissFacebookOverlays(page);
+    await page.waitForTimeout(4500);
+
+    await page.evaluate(() => window.scrollTo(0, Math.min(document.body.scrollHeight, 1800)));
+    await page.waitForTimeout(2200);
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(800);
+
+    const rawPosts = await page.evaluate(({ targetName, targetUrl, postsPerPage, pageIndex }) => {
+      const articleElements = Array.from(document.querySelectorAll('div[role="article"]'));
+      const seenUrls = new Set();
+      const output = [];
+
+      const badTextLines = new Set([
+        "thích",
+        "bình luận",
+        "chia sẻ",
+        "like",
+        "comment",
+        "share",
+        "xem thêm",
+        "see more",
+        "all reactions",
+        "tất cả cảm xúc",
+      ]);
+
+      function normalizeText(value) {
+        return String(value || "")
+          .replace(/\r\n?/g, "\n")
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .filter((line) => !badTextLines.has(line.toLowerCase()))
+          .join("\n")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+      }
+
+      function canonicalize(rawHref) {
+        try {
+          const url = new URL(rawHref, "https://www.facebook.com");
+          url.hash = "";
+
+          if (url.searchParams.has("story_fbid")) {
+            const story = url.searchParams.get("story_fbid");
+            const id = url.searchParams.get("id");
+            url.search = "";
+            if (story) url.searchParams.set("story_fbid", story);
+            if (id) url.searchParams.set("id", id);
+            return url.toString();
+          }
+
+          url.search = "";
+          return url.toString();
+        } catch {
+          return "";
+        }
+      }
+
+      function findPostUrl(article) {
+        const anchors = Array.from(article.querySelectorAll("a[href]"));
+        const patterns = [
+          "/posts/",
+          "/videos/",
+          "/photos/",
+          "/permalink/",
+          "story_fbid=",
+        ];
+
+        for (const pattern of patterns) {
+          const anchor = anchors.find((item) => String(item.href || "").includes(pattern));
+          if (anchor) return canonicalize(anchor.href);
+        }
+
+        return "";
+      }
+
+      function findTimestamp(article, fallbackIndex) {
+        const unixNode = article.querySelector("[data-utime]");
+        if (unixNode) {
+          const unix = Number(unixNode.getAttribute("data-utime"));
+          if (Number.isFinite(unix) && unix > 0) return unix * 1000;
+        }
+
+        const timeNode = article.querySelector("time[datetime]");
+        if (timeNode) {
+          const parsed = Date.parse(timeNode.getAttribute("datetime") || "");
+          if (Number.isFinite(parsed)) return parsed;
+        }
+
+        return Date.now() - pageIndex * 100000 - fallbackIndex * 1000;
+      }
+
+      function findImage(article) {
+        const images = Array.from(article.querySelectorAll("img[src]"))
+          .map((img) => ({
+            src: img.currentSrc || img.src || "",
+            width: img.naturalWidth || img.width || 0,
+            height: img.naturalHeight || img.height || 0,
+            alt: String(img.alt || "").toLowerCase(),
+          }))
+          .filter((item) => item.src.startsWith("http"))
+          .filter((item) => item.width >= 250 && item.height >= 180)
+          .filter((item) => !item.alt.includes("profile picture"))
+          .sort((a, b) => b.width * b.height - a.width * a.height);
+
+        return images[0]?.src || null;
+      }
+
+      for (let index = 0; index < articleElements.length; index += 1) {
+        if (output.length >= postsPerPage) break;
+
+        const article = articleElements[index];
+        const url = findPostUrl(article);
+        if (!url || seenUrls.has(url)) continue;
+
+        const text = normalizeText(article.innerText || article.textContent || "");
+        if (!text || text.length < 8) continue;
+
+        seenUrls.add(url);
+        output.push({
+          url,
+          text,
+          imageUrl: findImage(article),
+          timestamp: findTimestamp(article, index),
+          author: targetName,
+          sourcePage: targetUrl,
+        });
+      }
+
+      return output;
+    }, {
+      targetName: target.name,
+      targetUrl: target.url,
+      postsPerPage: POSTS_PER_PAGE,
+      pageIndex,
+    });
+
+    const posts = rawPosts.map((post) => ({
+      ...post,
+      id: makePostId(post.url),
+      text: cleanFacebookText(post.text, target.name),
+    }));
+
+    if (posts.length === 0) {
+      const slug = safeFilename(target.name);
+      await page.screenshot({ path: path.join(DEBUG_DIR, `${slug}.png`), fullPage: false });
+      await fs.writeFile(path.join(DEBUG_DIR, `${slug}.html`), await page.content(), "utf8");
+    }
+
+    return posts;
+  } finally {
+    await page.close();
+  }
+}
+
+async function dismissFacebookOverlays(page) {
+  const labels = [
+    "Allow all cookies",
+    "Cho phép tất cả cookie",
+    "Only allow essential cookies",
+    "Chỉ cho phép cookie thiết yếu",
+    "Decline optional cookies",
+    "Từ chối cookie không bắt buộc",
+    "Close",
+    "Đóng",
+  ];
+
+  for (const label of labels) {
+    try {
+      const button = page.getByRole("button", { name: label, exact: true }).first();
+      if (await button.isVisible({ timeout: 600 })) {
+        await button.click({ timeout: 1500 });
+        await page.waitForTimeout(400);
+      }
+    } catch {
+      // Facebook thay đổi giao diện thường xuyên; bỏ qua nếu nút không tồn tại.
+    }
+  }
+}
+
+async function loadFacebookCookies(context) {
+  const raw = process.env.FACEBOOK_COOKIES_JSON;
+  if (!raw) {
+    console.log("Không có FACEBOOK_COOKIES_JSON; thử quét page công khai không đăng nhập.");
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    const cookies = Array.isArray(parsed) ? parsed : parsed.cookies;
+
+    if (!Array.isArray(cookies) || cookies.length === 0) {
+      throw new Error("Secret không chứa danh sách cookies hợp lệ.");
+    }
+
+    const normalized = cookies
+      .filter((cookie) => cookie && cookie.name && cookie.value)
+      .map((cookie) => ({
+        name: String(cookie.name),
+        value: String(cookie.value),
+        domain: cookie.domain || ".facebook.com",
+        path: cookie.path || "/",
+        expires: Number.isFinite(Number(cookie.expires)) ? Number(cookie.expires) : -1,
+        httpOnly: Boolean(cookie.httpOnly),
+        secure: cookie.secure !== false,
+        sameSite: normalizeSameSite(cookie.sameSite),
+      }));
+
+    await context.addCookies(normalized);
+    console.log(`Đã nạp ${normalized.length} Facebook cookies từ GitHub Secret.`);
+  } catch (error) {
+    throw new Error(
+      "FACEBOOK_COOKIES_JSON không hợp lệ: " +
+        (error instanceof Error ? error.message : String(error))
+    );
+  }
+}
+
+function normalizeSameSite(value) {
+  const text = String(value || "").toLowerCase();
+  if (text === "strict") return "Strict";
+  if (text === "none" || text === "no_restriction") return "None";
+  return "Lax";
+}
+
+function cleanFacebookText(value, author) {
+  let text = String(value || "")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\t ]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  if (text.startsWith(author + "\n")) {
+    text = text.slice(author.length + 1).trim();
+  }
+
+  return text || "Bài viết không có nội dung chữ.";
+}
+
+function dedupe(posts) {
+  const map = new Map();
+  for (const post of posts) {
+    if (!post.id || !post.url) continue;
+    if (!map.has(post.id)) map.set(post.id, post);
+  }
+
+  return Array.from(map.values()).sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function makePostId(url) {
+  const value = String(url || "");
+  const patterns = [
+    /\/posts\/(\d+)/i,
+    /\/videos\/(\d+)/i,
+    /story_fbid=(\d+)/i,
+    /\/photos\/[^/]+\/(\d+)/i,
+    /\/permalink\/(\d+)/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match?.[1]) return match[1];
+  }
+
+  return crypto.createHash("sha256").update(value).digest("hex").slice(0, 24);
+}
+
+async function sendPost(post, testMode) {
+  const matchedPinKeywords = getMatchedPinKeywords(post);
+  const priority = matchedPinKeywords.length > 0;
+
+  const titleBase = testMode
+    ? "🧪 TEST — " + post.author
+    : "🔔 " + post.author + " vừa có bài mới";
+
+  const title =
+    titleBase +
+    (priority
+      ? "\n📌 Bài quan trọng — từ khóa: " + matchedPinKeywords.join(", ")
+      : "");
+
+  const time = new Date(post.timestamp).toLocaleString("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    hour12: false,
+  });
+
+  const linkedTimeText = "🕒 " + time;
+  const linkedTime =
+    '<a href="' + escapeHtml(post.url) + '">' + escapeHtml(linkedTimeText) + "</a>";
+
+  let messageId = null;
+
+  if (post.imageUrl) {
+    const caption = buildPostMessage(post, title, linkedTime, linkedTimeText, CAPTION_MAX);
+    try {
+      messageId = await sendPhoto(post.imageUrl, caption);
+    } catch (error) {
+      console.warn("Không gửi được ảnh, chuyển sang text:", error instanceof Error ? error.message : error);
+      const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
+      messageId = await sendText(text, false);
+    }
+  } else {
+    const text = buildPostMessage(post, title, linkedTime, linkedTimeText, TEXT_MAX);
+    messageId = await sendText(text, false);
+  }
+
+  let pinned = false;
+  let pinError = null;
+
+  if (!testMode && priority && messageId) {
+    try {
+      await pinMessage(messageId);
+      pinned = true;
+    } catch (error) {
+      pinError = error instanceof Error ? error.message : String(error);
+      console.error("Không ghim được bài:", pinError);
+    }
+  }
+
+  return { messageId, priority, matchedPinKeywords, pinned, pinError };
+}
+
+function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
+  const fullText = String(post.text || "").trim() || "Bài viết không có nội dung chữ.";
+  const fixedLength = visibleLength(title) + 4 + visibleLength(linkedTimeText);
+  const contentBudget = Math.max(1, maxLength - fixedLength);
+
+  const firstLineBreak = fullText.indexOf("\n");
+  let firstLine = firstLineBreak >= 0 ? fullText.slice(0, firstLineBreak).trim() : fullText.trim();
+  let hiddenContent = firstLineBreak >= 0 ? fullText.slice(firstLineBreak + 1).trim() : "";
+
+  const needsHidden = Boolean(hiddenContent) || visibleLength(firstLine) > contentBudget;
+  const firstLineBudget = Math.max(1, contentBudget - (needsHidden ? 3 : 0));
+  const firstLineParts = splitAtBoundary(firstLine, firstLineBudget);
+  firstLine = firstLineParts.head;
+
+  if (firstLineParts.tail) {
+    hiddenContent = hiddenContent ? firstLineParts.tail + "\n" + hiddenContent : firstLineParts.tail;
+  }
+
+  let bodyHtml = escapeHtml(firstLine);
+
+  if (hiddenContent) {
+    const hiddenBudget = Math.max(0, contentBudget - visibleLength(firstLine) - 2);
+    if (hiddenBudget > 0) {
+      let hiddenText = hiddenContent;
+      if (visibleLength(hiddenText) > hiddenBudget) {
+        hiddenText = splitAtBoundary(hiddenText, Math.max(0, hiddenBudget - 1)).head + "…";
+      }
+      bodyHtml += "\n\n<blockquote expandable>" + escapeHtml(hiddenText) + "</blockquote>";
+    }
+  }
+
+  return escapeHtml(title) + "\n\n" + bodyHtml + "\n\n" + linkedTime;
+}
+
+function splitAtBoundary(value, maxLength) {
+  const chars = Array.from(String(value || "").trim());
+  if (chars.length <= maxLength) return { head: chars.join(""), tail: "" };
+
+  const tentative = chars.slice(0, maxLength).join("");
+  const minimumCut = Math.floor(tentative.length * 0.55);
+  const candidates = [
+    tentative.lastIndexOf("\n\n"),
+    tentative.lastIndexOf("\n"),
+    tentative.lastIndexOf(". "),
+    tentative.lastIndexOf("! "),
+    tentative.lastIndexOf("? "),
+    tentative.lastIndexOf(", "),
+    tentative.lastIndexOf(" "),
+  ].filter((index) => index >= minimumCut);
+
+  const cut = candidates.length > 0 ? Math.max(...candidates) : tentative.length;
+  const full = chars.join("");
+  return { head: full.slice(0, cut).trim(), tail: full.slice(cut).trim() };
+}
+
+function getMatchedPinKeywords(post) {
+  const text = normalizeForSearch(post?.text || "");
+  return PIN_KEYWORDS.filter((keyword) => text.includes(normalizeForSearch(keyword)));
+}
+
+function normalizeForSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase();
+}
+
+async function sendPhoto(photoUrl, caption) {
+  const endpoint = telegramEndpoint("sendPhoto");
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: process.env.TELEGRAM_CHAT_ID,
+      photo: photoUrl,
+      caption,
+      parse_mode: "HTML",
+    }),
+  });
+
+  const result = await readJson(response);
+  if (!response.ok || !result?.ok) {
+    throw new Error(result?.description || `Telegram sendPhoto HTTP ${response.status}`);
+  }
+
+  return result.result?.message_id || null;
+}
+
+async function sendText(text, disablePreview) {
+  const response = await fetch(telegramEndpoint("sendMessage"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: process.env.TELEGRAM_CHAT_ID,
+      text,
+      parse_mode: "HTML",
+      disable_web_page_preview: Boolean(disablePreview),
+    }),
+  });
+
+  const result = await readJson(response);
+  if (!response.ok || !result?.ok) {
+    throw new Error(result?.description || `Telegram sendMessage HTTP ${response.status}`);
+  }
+
+  return result.result?.message_id || null;
+}
+
+async function pinMessage(messageId) {
+  const response = await fetch(telegramEndpoint("pinChatMessage"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: process.env.TELEGRAM_CHAT_ID,
+      message_id: messageId,
+      disable_notification: true,
+    }),
+  });
+
+  const result = await readJson(response);
+  if (!response.ok || !result?.ok) {
+    throw new Error(result?.description || `Telegram pinChatMessage HTTP ${response.status}`);
+  }
+}
+
+function telegramEndpoint(method) {
+  return `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/${method}`;
+}
+
+async function loadState() {
+  try {
+    const raw = await fs.readFile(STATE_FILE, "utf8");
+    const value = JSON.parse(raw);
+    return {
+      initialized: value?.initialized === true,
+      ids: Array.isArray(value?.ids) ? value.ids.map(String) : [],
+    };
+  } catch {
+    return { initialized: false, ids: [] };
+  }
+}
+
+async function saveState(ids, initialized) {
+  const unique = Array.from(new Set(ids.filter(Boolean).map(String))).slice(-MAX_SEEN);
+  const value = {
+    initialized: initialized !== false,
+    ids: unique,
+    updatedAt: new Date().toISOString(),
+  };
+  await fs.writeFile(STATE_FILE, JSON.stringify(value, null, 2) + "\n", "utf8");
+}
+
+function printSummary(value) {
+  console.log("\n===== SUMMARY =====");
+  console.log(JSON.stringify(value, null, 2));
+}
+
+function safeFilename(value) {
+  return normalizeForSearch(value)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 70) || "facebook-page";
+}
+
+function visibleLength(value) {
+  return Array.from(String(value || "")).length;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+async function readJson(response) {
+  try {
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+function needEnv(names) {
+  for (const name of names) {
+    if (!process.env[name]) throw new Error(`Thiếu GitHub Secret ${name}`);
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+main().catch((error) => {
+  console.error("BOT FAILED:", error);
+  process.exitCode = 1;
+});
