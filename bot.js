@@ -43,10 +43,82 @@ const PAGES = [
 ];
 
 const PIN_KEYWORDS = [
-  "thông báo",
+  // Công văn, văn bản hành chính
   "công văn",
-  "đánh giá",
+  "quyết định",
+  "công điện",
+  "hướng dẫn thực hiện",
+  "triển khai thực hiện",
+  "yêu cầu thực hiện",
+  "đề nghị thực hiện",
+  "gia hạn",
+  "hạn chót",
+  "nộp hồ sơ",
+  "bổ sung hồ sơ",
   "khai báo",
+
+  // Đăng ký tín chỉ, học phần, lớp
+  "đăng kí tín chỉ",
+  "đăng ký tín chỉ",
+  "đăng kí học phần",
+  "đăng ký học phần",
+  "đăng kí môn học",
+  "đăng ký môn học",
+  "kế hoạch đăng ký lớp",
+  "kế hoạch đăng kí lớp",
+  "thời gian đăng ký lớp",
+  "thời gian đăng kí lớp",
+  "đăng ký lớp học kỳ",
+  "đăng kí lớp học kỳ",
+  "lịch đăng ký học phần",
+  "lịch đăng kí học phần",
+  "trung tâm mở lớp",
+  "mở lớp học phần",
+  "mở lớp bổ sung",
+  "hủy lớp",
+  "đóng lớp",
+
+  // BHYT
+  "bhyt",
+  "bảo hiểm y tế",
+  "bảo hiểm y tế sinh viên",
+  "tham gia bhyt",
+  "thực hiện bhyt",
+  "thẻ bhyt",
+  "gia hạn bhyt",
+  "mức đóng bhyt",
+  "bổ sung thông tin bhyt",
+
+  // Học phí
+  "nộp học phí",
+  "học phí học kỳ",
+  "học phí học kỳ hè",
+  "thời hạn nộp học phí",
+  "đóng học phí",
+  "gia hạn học phí",
+  "miễn giảm học phí",
+
+  // Thời tiết, nghỉ học, học trực tuyến
+  "tổ chức học trực tuyến",
+  "chuyển sang học trực tuyến",
+  "tạm dừng học trực tiếp",
+  "nghỉ học do bão",
+  "nghỉ học do ảnh hưởng của bão",
+  "nghỉ học do mưa lớn",
+  "phòng chống mưa lớn",
+  "mưa lớn và ngập lụt",
+  "mưa lớn, ngập lụt",
+
+  // Học vụ quan trọng
+  "lịch thi",
+  "đổi lịch thi",
+  "hoãn thi",
+  "điều chỉnh lịch học",
+  "cảnh báo học vụ",
+  "xét tốt nghiệp",
+  "xét học bổng",
+
+  // Rèn luyện
   "đánh giá rèn luyện",
   "điểm rèn luyện",
   "kết quả rèn luyện",
@@ -54,6 +126,9 @@ const PIN_KEYWORDS = [
   "phiếu đánh giá rèn luyện",
   "minh chứng rèn luyện",
   "rèn luyện sinh viên",
+
+  // Theo yêu cầu
+  "tin hot",
 ];
 
 const STATE_FILE = path.resolve("state.json");
