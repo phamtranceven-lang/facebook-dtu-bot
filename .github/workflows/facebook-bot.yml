@@ -1,13 +1,8 @@
 name: Facebook DTU Telegram Bot
 
 on:
-  # GitHub chỉ chạy dự phòng 2 lần/ngày.
-  schedule:
-    # 03:53 UTC = 10:53 Việt Nam
-    # 13:53 UTC = 20:53 Việt Nam
-    - cron: "53 3,13 * * *"
-
-  # Cho Cloudflare hoặc người dùng kích hoạt workflow.
+  # Chỉ Cloudflare Worker hoặc người dùng kích hoạt.
+  # Không dùng GitHub schedule nữa để tránh chạy trùng.
   workflow_dispatch:
     inputs:
       mode:
@@ -22,6 +17,8 @@ on:
 permissions:
   contents: write
 
+# Không cho hai bot chạy đồng thời.
+# Lượt sau phải chờ lượt trước hoàn tất.
 concurrency:
   group: facebook-dtu-telegram-bot
   cancel-in-progress: false
@@ -32,8 +29,13 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Checkout repository
+      # Luôn lấy nhánh main mới nhất tại thời điểm job thực sự bắt đầu.
+      # Tránh đọc state.json cũ khi workflow phải xếp hàng.
+      - name: Checkout latest main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -53,14 +55,12 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_PRIORITY_CHAT_ID: ${{ secrets.TELEGRAM_PRIORITY_CHAT_ID }}
           FACEBOOK_COOKIES_JSON: ${{ secrets.FACEBOOK_COOKIES_JSON }}
-
-          # Cloudflare gửi mode normal.
-          # GitHub schedule cũng mặc định chạy normal.
           BOT_MODE: ${{ github.event.inputs.mode || 'normal' }}
         run: node bot.js
 
+      # Chỉ lưu state khi bot chạy thành công và không phải test3.
       - name: Save state.json
-        if: ${{ always() && (github.event_name != 'workflow_dispatch' || github.event.inputs.mode != 'test3') }}
+        if: ${{ success() && github.event.inputs.mode != 'test3' }}
         run: |
           if git diff --quiet -- state.json; then
             echo "state.json không thay đổi."
@@ -72,7 +72,10 @@ jobs:
 
           git add state.json
           git commit -m "Update Facebook bot state"
-          git push
+
+          # Lấy thay đổi mới nhất trước khi push để tránh lỗi fetch first.
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Upload debug files
         if: always()
