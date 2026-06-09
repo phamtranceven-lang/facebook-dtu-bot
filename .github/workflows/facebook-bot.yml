@@ -2,9 +2,11 @@ name: Facebook DTU Telegram Bot
 
 on:
   schedule:
-    # UTC: 00:17, 04:17, 08:17, 12:17
-    # Việt Nam: 07:17, 11:17, 15:17, 19:17
-    - cron: "17 0,4,8,12 * * *"
+    # Chạy 2 giờ/lần vào ban ngày để nếu GitHub bỏ lỡ một lượt,
+    # bot sẽ tự quét bù ở lượt kế tiếp.
+    # UTC: 00:37, 02:37, 04:37, 06:37, 08:37, 10:37, 12:37, 14:37
+    # Việt Nam: 07:37, 09:37, 11:37, 13:37, 15:37, 17:37, 19:37, 21:37
+    - cron: "37 0,2,4,6,8,10,12,14 * * *"
 
   workflow_dispatch:
     inputs:
