@@ -777,8 +777,7 @@ function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
     String(post.text || "").trim() || "Bài viết không có nội dung chữ."
   );
 
-  // Dòng thời gian chính là link mở bài Facebook và luôn nằm cuối caption.
-  // Chỉ chừa đủ ký tự cho tiêu đề, khoảng cách và dòng thời gian.
+  // Dòng thời gian luôn nằm cuối và chính là link mở bài Facebook.
   const footerHtml = linkedTime;
   const footerVisibleLength = visibleLength(linkedTimeText);
 
@@ -790,39 +789,40 @@ function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
 
   const contentBudget = Math.max(1, maxLength - fixedLength);
 
-  // Chỉ để dòng đầu tiên hiện sẵn.
-  // Toàn bộ nội dung còn lại nằm trong blockquote expandable của Telegram.
-  const firstLineBreak = fullText.indexOf("\n");
-  let firstLine =
-    firstLineBreak >= 0
-      ? fullText.slice(0, firstLineBreak).trim()
-      : fullText.trim();
-  let hiddenContent =
-    firstLineBreak >= 0
-      ? fullText.slice(firstLineBreak + 1).trim()
-      : "";
+  // Chỉ hiển thị đúng câu đầu tiên.
+  // Toàn bộ phần còn lại nằm trong blockquote expandable của Telegram.
+  const firstSentenceParts = splitFirstSentence(fullText);
+  let firstSentence = firstSentenceParts.head;
+  let hiddenContent = firstSentenceParts.tail;
 
-  // Nếu riêng dòng đầu quá dài, phần vượt cũng chuyển xuống "Xem thêm".
   const needsHidden =
-    Boolean(hiddenContent) || visibleLength(firstLine) > contentBudget;
+    Boolean(hiddenContent) || visibleLength(firstSentence) > contentBudget;
   const hiddenReserve = needsHidden ? 3 : 0;
-  const firstLineBudget = Math.max(1, contentBudget - hiddenReserve);
-  const firstLineParts = splitAtBoundary(firstLine, firstLineBudget);
-  firstLine = firstLineParts.head;
+  const firstSentenceBudget = Math.max(1, contentBudget - hiddenReserve);
 
-  if (firstLineParts.tail) {
-    hiddenContent = hiddenContent
-      ? firstLineParts.tail + "\n" + hiddenContent
-      : firstLineParts.tail;
+  // Nếu câu đầu quá dài, cắt mềm và chuyển phần dư xuống "Xem thêm".
+  if (visibleLength(firstSentence) > firstSentenceBudget) {
+    const firstSentenceSplit = splitAtBoundary(
+      firstSentence,
+      firstSentenceBudget
+    );
+
+    firstSentence = firstSentenceSplit.head;
+
+    if (firstSentenceSplit.tail) {
+      hiddenContent = hiddenContent
+        ? firstSentenceSplit.tail + "\n\n" + hiddenContent
+        : firstSentenceSplit.tail;
+    }
   }
 
-  let bodyHtml = escapeHtml(firstLine);
+  let bodyHtml = escapeHtml(firstSentence);
 
   if (hiddenContent) {
     const separatorLength = 2;
     const hiddenBudget = Math.max(
       0,
-      contentBudget - visibleLength(firstLine) - separatorLength
+      contentBudget - visibleLength(firstSentence) - separatorLength
     );
 
     if (hiddenBudget > 0) {
@@ -842,6 +842,39 @@ function buildPostMessage(post, title, linkedTime, linkedTimeText, maxLength) {
   }
 
   return escapeHtml(title) + "\n\n" + bodyHtml + "\n\n" + footerHtml;
+}
+
+function splitFirstSentence(value) {
+  const text = String(value || "").trim();
+
+  if (!text) {
+    return { head: "", tail: "" };
+  }
+
+  // Bắt câu đầu theo dấu chấm, chấm than, chấm hỏi hoặc dấu ba chấm.
+  // Emoji, hashtag và khoảng cách của phần còn lại vẫn được giữ nguyên.
+  const sentenceEndPattern = /[.!?…]+(?=\s|$)/gu;
+  const sentenceMatch = sentenceEndPattern.exec(text);
+
+  if (!sentenceMatch) {
+    const firstLineBreak = text.indexOf("\n");
+
+    if (firstLineBreak >= 0) {
+      return {
+        head: text.slice(0, firstLineBreak).trim(),
+        tail: text.slice(firstLineBreak + 1).trim(),
+      };
+    }
+
+    return { head: text, tail: "" };
+  }
+
+  const cut = sentenceMatch.index + sentenceMatch[0].length;
+
+  return {
+    head: text.slice(0, cut).trim(),
+    tail: text.slice(cut).trim(),
+  };
 }
 
 function normalizePostText(value) {
