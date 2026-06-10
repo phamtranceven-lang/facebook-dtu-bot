@@ -136,7 +136,7 @@ const DEBUG_DIR = path.resolve("debug");
 const MAX_SEEN = 500;
 const POSTS_PER_PAGE = 5;
 const CAPTION_MAX = 1024;
-const TEXT_MAX = 3800;
+const TEXT_MAX = 4096;
 const BOT_MODE = String(process.env.BOT_MODE || "normal").toLowerCase();
 
 async function main() {
