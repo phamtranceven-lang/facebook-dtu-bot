@@ -851,21 +851,22 @@ function splitFirstSentence(value) {
     return { head: "", tail: "" };
   }
 
-  // Bắt câu đầu theo dấu chấm, chấm than, chấm hỏi hoặc dấu ba chấm.
-  // Emoji, hashtag và khoảng cách của phần còn lại vẫn được giữ nguyên.
+  // Chỉ lấy đúng dòng đầu tiên của bài Facebook để hiện ra ngoài.
+  // Tất cả nội dung từ dòng thứ hai trở đi nằm trong "Xem thêm".
+  const firstLineBreak = text.indexOf("\n");
+
+  if (firstLineBreak >= 0) {
+    return {
+      head: text.slice(0, firstLineBreak).trim(),
+      tail: text.slice(firstLineBreak + 1).trim(),
+    };
+  }
+
+  // Nếu bài chỉ có một dòng dài thì mới cắt theo câu đầu tiên.
   const sentenceEndPattern = /[.!?…]+(?=\s|$)/gu;
   const sentenceMatch = sentenceEndPattern.exec(text);
 
   if (!sentenceMatch) {
-    const firstLineBreak = text.indexOf("\n");
-
-    if (firstLineBreak >= 0) {
-      return {
-        head: text.slice(0, firstLineBreak).trim(),
-        tail: text.slice(firstLineBreak + 1).trim(),
-      };
-    }
-
     return { head: text, tail: "" };
   }
 
