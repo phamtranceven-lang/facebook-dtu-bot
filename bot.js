@@ -200,23 +200,49 @@ async function main() {
   const state = await loadState();
 
   if (!state.initialized) {
-    await saveState(posts.map((post) => post.id), true);
+    await saveState(
+      posts.map((post) => post.id),
+      true,
+      posts.map((post) => post.fingerprint)
+    );
     console.log("Đã khởi tạo state.json. Lần đầu không gửi bài cũ.");
     printSummary({ ok: posts.length > 0, initialized: true, found: posts.length, sent: 0, pageErrors });
     return;
   }
 
-  const seen = new Set(state.ids);
-  const newPosts = posts.filter((post) => !seen.has(post.id)).reverse();
+  // Migration cho state.json cũ: trước đây chỉ lưu id nên Facebook đổi URL là bị gửi trùng.
+  // Lần đầu sau khi nâng cấp sẽ ghi thêm fingerprint của các bài đang thấy và không gửi,
+  // để chặn spam lại các bài cũ trong media Telegram.
+  if (!state.hasFingerprints) {
+    await saveState(
+      state.ids.concat(posts.map((post) => post.id)),
+      true,
+      posts.map((post) => post.fingerprint)
+    );
+    console.log("Đã nâng cấp state.json sang chống trùng bằng fingerprint. Lần này không gửi để tránh spam bài cũ.");
+    printSummary({ ok: posts.length > 0 || pageErrors.length < PAGES.length, migratedFingerprints: true, found: posts.length, sent: 0, pageErrors });
+    return;
+  }
+
+  const seenIds = new Set(state.ids);
+  const seenFingerprints = new Set(state.fingerprints);
+  const newPosts = posts
+    .filter((post) => !seenIds.has(post.id) && !seenFingerprints.has(post.fingerprint))
+    .reverse();
 
   if (newPosts.length === 0) {
-    await saveState(state.ids.concat(posts.map((post) => post.id)), true);
+    await saveState(
+      state.ids.concat(posts.map((post) => post.id)),
+      true,
+      state.fingerprints.concat(posts.map((post) => post.fingerprint))
+    );
     console.log("Chưa có bài mới.");
     printSummary({ ok: posts.length > 0 || pageErrors.length < PAGES.length, found: posts.length, sent: 0, pageErrors });
     return;
   }
 
   const savedIds = state.ids.slice();
+  const savedFingerprints = state.fingerprints.slice();
   let sent = 0;
   let pinned = 0;
   const sendErrors = [];
@@ -225,9 +251,10 @@ async function main() {
     try {
       const result = await sendPost(post, false);
       savedIds.push(post.id);
+      savedFingerprints.push(post.fingerprint);
       sent += 1;
       if (result.pinned) pinned += 1;
-      await saveState(savedIds, true);
+      await saveState(savedIds, true, savedFingerprints);
       await sleep(1000);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -443,11 +470,19 @@ async function scrapeFacebookPage(context, target, pageIndex) {
       pageIndex,
     });
 
-    const posts = rawPosts.map((post) => ({
-      ...post,
-      id: makePostId(post.url),
-      text: cleanFacebookText(post.text, target.name),
-    }));
+    const posts = rawPosts.map((post) => {
+      const text = cleanFacebookText(post.text, target.name);
+      const normalizedPost = {
+        ...post,
+        id: makePostId(post.url),
+        text,
+      };
+
+      return {
+        ...normalizedPost,
+        fingerprint: makePostFingerprint(normalizedPost),
+      };
+    });
 
     if (posts.length === 0) {
       const slug = safeFilename(target.name);
@@ -643,9 +678,22 @@ function cleanFacebookText(value, author) {
 
 function dedupe(posts) {
   const map = new Map();
+
   for (const post of posts) {
     if (!post.id || !post.url) continue;
-    if (!map.has(post.id)) map.set(post.id, post);
+
+    const key = post.fingerprint || post.id;
+    const existing = map.get(key);
+
+    if (!existing) {
+      map.set(key, post);
+      continue;
+    }
+
+    // Nếu cùng một bài bị Facebook trả nhiều dạng URL/ảnh, giữ bản có text dài hơn.
+    if (visibleLength(post.text || "") > visibleLength(existing.text || "")) {
+      map.set(key, post);
+    }
   }
 
   return Array.from(map.values()).sort((a, b) => b.timestamp - a.timestamp);
@@ -667,6 +715,28 @@ function makePostId(url) {
   }
 
   return crypto.createHash("sha256").update(value).digest("hex").slice(0, 24);
+}
+
+function makePostFingerprint(post) {
+  const text = normalizeForSearch(post?.text || "")
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/www\.\S+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (text.length >= 30 && text !== normalizeForSearch("Bài viết không có nội dung chữ.")) {
+    // Dùng nội dung thay vì URL vì Facebook hay đổi link /posts /photos /story_fbid.
+    // Không đưa tên page vào fingerprint để cùng một bài share/cross-post không bị gửi 4-5 lần.
+    return "text:" + crypto.createHash("sha256").update(text.slice(0, 1200)).digest("hex").slice(0, 24);
+  }
+
+  const fallback = [
+    post?.url || "",
+    post?.imageUrl || "",
+    post?.author || "",
+  ].join("|");
+
+  return "fallback:" + crypto.createHash("sha256").update(fallback).digest("hex").slice(0, 24);
 }
 
 async function sendPost(post, testMode) {
@@ -1001,22 +1071,34 @@ async function loadState() {
   try {
     const raw = await fs.readFile(STATE_FILE, "utf8");
     const value = JSON.parse(raw);
+    const fingerprints = Array.isArray(value?.fingerprints)
+      ? value.fingerprints.map(String)
+      : [];
+
     return {
       initialized: value?.initialized === true,
       ids: Array.isArray(value?.ids) ? value.ids.map(String) : [],
+      fingerprints,
+      hasFingerprints: Array.isArray(value?.fingerprints),
     };
   } catch {
-    return { initialized: false, ids: [] };
+    return { initialized: false, ids: [], fingerprints: [], hasFingerprints: false };
   }
 }
 
-async function saveState(ids, initialized) {
-  const unique = Array.from(new Set(ids.filter(Boolean).map(String))).slice(-MAX_SEEN);
+async function saveState(ids, initialized, fingerprints = []) {
+  const uniqueIds = Array.from(new Set(ids.filter(Boolean).map(String))).slice(-MAX_SEEN);
+  const uniqueFingerprints = Array.from(
+    new Set(fingerprints.filter(Boolean).map(String))
+  ).slice(-MAX_SEEN);
+
   const value = {
     initialized: initialized !== false,
-    ids: unique,
+    ids: uniqueIds,
+    fingerprints: uniqueFingerprints,
     updatedAt: new Date().toISOString(),
   };
+
   await fs.writeFile(STATE_FILE, JSON.stringify(value, null, 2) + "\n", "utf8");
 }
 
