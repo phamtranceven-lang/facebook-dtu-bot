@@ -133,11 +133,12 @@ const PIN_KEYWORDS = [
 
 const STATE_FILE = path.resolve("state.json");
 const DEBUG_DIR = path.resolve("debug");
-const MAX_SEEN = 500;
+const MAX_SEEN = 5000;
 const POSTS_PER_PAGE = 5;
 const CAPTION_MAX = 1024;
 const TEXT_MAX = 4096;
 const BOT_MODE = String(process.env.BOT_MODE || "normal").toLowerCase();
+const ANTI_DUP_VERSION = 4;
 
 async function main() {
   needEnv(["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"]);
@@ -199,66 +200,69 @@ async function main() {
 
   const state = await loadState();
 
-  if (!state.initialized) {
-    await saveState(
-      posts.map((post) => post.id),
-      true,
-      posts.map((post) => post.fingerprint)
+  // PRO MAX anti-duplicate migration.
+  // Nếu state.json cũ chưa có bộ khóa chống trùng đời mới thì chỉ ghi nhận các bài đang thấy,
+  // không gửi lần này. Làm vậy để chặn spam lại các bài đã từng gửi trong Telegram.
+  if (!state.initialized || state.antiDuplicateVersion !== ANTI_DUP_VERSION) {
+    await rememberVisiblePosts(state, posts);
+    console.log(
+      `Đã khởi tạo/nâng cấp state.json sang Anti-Dup v${ANTI_DUP_VERSION}. ` +
+        "Lần này không gửi để tránh spam lại bài cũ."
     );
-    console.log("Đã khởi tạo state.json. Lần đầu không gửi bài cũ.");
-    printSummary({ ok: posts.length > 0, initialized: true, found: posts.length, sent: 0, pageErrors });
+    printSummary({
+      ok: posts.length > 0 || pageErrors.length < PAGES.length,
+      initialized: true,
+      upgradedAntiDuplicate: true,
+      antiDuplicateVersion: ANTI_DUP_VERSION,
+      found: posts.length,
+      sent: 0,
+      pageErrors,
+    });
     return;
   }
 
-  // Migration cho state.json cũ: trước đây chỉ lưu id nên Facebook đổi URL là bị gửi trùng.
-  // Lần đầu sau khi nâng cấp sẽ ghi thêm fingerprint của các bài đang thấy và không gửi,
-  // để chặn spam lại các bài cũ trong media Telegram.
-  if (!state.hasFingerprints) {
-    await saveState(
-      state.ids.concat(posts.map((post) => post.id)),
-      true,
-      posts.map((post) => post.fingerprint)
-    );
-    console.log("Đã nâng cấp state.json sang chống trùng bằng fingerprint. Lần này không gửi để tránh spam bài cũ.");
-    printSummary({ ok: posts.length > 0 || pageErrors.length < PAGES.length, migratedFingerprints: true, found: posts.length, sent: 0, pageErrors });
-    return;
-  }
-
-  const seenIds = new Set(state.ids);
-  const seenFingerprints = new Set(state.fingerprints);
-  const newPosts = posts
-    .filter((post) => !seenIds.has(post.id) && !seenFingerprints.has(post.fingerprint))
-    .reverse();
+  const newPosts = posts.filter((post) => !isSeenPost(state, post)).reverse();
 
   if (newPosts.length === 0) {
-    await saveState(
-      state.ids.concat(posts.map((post) => post.id)),
-      true,
-      state.fingerprints.concat(posts.map((post) => post.fingerprint))
-    );
-    console.log("Chưa có bài mới.");
-    printSummary({ ok: posts.length > 0 || pageErrors.length < PAGES.length, found: posts.length, sent: 0, pageErrors });
+    await rememberVisiblePosts(state, posts);
+    console.log("Chưa có bài mới. Đã cập nhật thêm UID/key hiện thấy để chống trùng.");
+    printSummary({
+      ok: posts.length > 0 || pageErrors.length < PAGES.length,
+      found: posts.length,
+      sent: 0,
+      antiDuplicateVersion: ANTI_DUP_VERSION,
+      pageErrors,
+    });
     return;
   }
 
-  const savedIds = state.ids.slice();
-  const savedFingerprints = state.fingerprints.slice();
   let sent = 0;
   let pinned = 0;
+  let skippedDuplicateBeforeSend = 0;
   const sendErrors = [];
 
   for (const post of newPosts) {
     try {
+      // Lớp bảo vệ cuối: kiểm tra lại ngay trước khi gửi.
+      // Nếu cùng run hoặc run trước đã nhớ post này thì tuyệt đối không gửi lần 2.
+      if (isSeenPost(state, post)) {
+        skippedDuplicateBeforeSend += 1;
+        console.log("Bỏ qua trùng ngay trước khi gửi:", post.uid || post.id, post.author);
+        continue;
+      }
+
+      // Mark-before-send: ghi state trước khi gửi Telegram để nếu job/rerun bị lặp,
+      // bài này vẫn không bị bắn lại lần 2. Ưu tiên không spam hơn là gửi lại khi lỗi mạng.
+      rememberPost(state, post);
+      await saveStateObject(state);
+
       const result = await sendPost(post, false);
-      savedIds.push(post.id);
-      savedFingerprints.push(post.fingerprint);
       sent += 1;
       if (result.pinned) pinned += 1;
-      await saveState(savedIds, true, savedFingerprints);
       await sleep(1000);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      sendErrors.push({ page: post.author, url: post.url, error: message });
+      sendErrors.push({ page: post.author, url: post.url, uid: post.uid, error: message });
       console.error("Không gửi được bài:", message);
     }
   }
@@ -472,15 +476,20 @@ async function scrapeFacebookPage(context, target, pageIndex) {
 
     const posts = rawPosts.map((post) => {
       const text = cleanFacebookText(post.text, target.name);
-      const normalizedPost = {
+      const uid = makePostUid(post.url);
+      const normalizedUrl = normalizePostUrl(post.url);
+      const enrichedPost = {
         ...post,
-        id: makePostId(post.url),
+        id: uid,
+        uid,
+        normalizedUrl,
         text,
       };
 
       return {
-        ...normalizedPost,
-        fingerprint: makePostFingerprint(normalizedPost),
+        ...enrichedPost,
+        fingerprint: hashShort(normalizeForDedup(text), 32),
+        keys: makePostKeys(enrichedPost),
       };
     });
 
@@ -677,66 +686,221 @@ function cleanFacebookText(value, author) {
 }
 
 function dedupe(posts) {
-  const map = new Map();
+  const kept = [];
+  const seenKeys = new Set();
 
   for (const post of posts) {
-    if (!post.id || !post.url) continue;
+    if (!post?.url || !Array.isArray(post.keys) || post.keys.length === 0) continue;
 
-    const key = post.fingerprint || post.id;
-    const existing = map.get(key);
+    const duplicated = post.keys.some((key) => seenKeys.has(key));
+    if (duplicated) continue;
 
-    if (!existing) {
-      map.set(key, post);
-      continue;
-    }
-
-    // Nếu cùng một bài bị Facebook trả nhiều dạng URL/ảnh, giữ bản có text dài hơn.
-    if (visibleLength(post.text || "") > visibleLength(existing.text || "")) {
-      map.set(key, post);
-    }
+    kept.push(post);
+    for (const key of post.keys) seenKeys.add(key);
   }
 
-  return Array.from(map.values()).sort((a, b) => b.timestamp - a.timestamp);
+  return kept.sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function makePostUid(url) {
+  const ids = extractFacebookIds(url);
+  if (ids.length > 0) return ids[0];
+  return hashShort(normalizePostUrl(url), 24);
 }
 
 function makePostId(url) {
+  return makePostUid(url);
+}
+
+function extractFacebookIds(url) {
   const value = String(url || "");
+  const ids = [];
+
+  const add = (item) => {
+    const text = String(item || "").trim();
+    if (/^\d{6,}$/.test(text) && !ids.includes(text)) ids.push(text);
+  };
+
+  try {
+    const parsed = new URL(value, "https://www.facebook.com");
+    for (const name of [
+      "story_fbid",
+      "fbid",
+      "id",
+      "set",
+      "v",
+      "multi_permalinks",
+    ]) {
+      const param = parsed.searchParams.get(name);
+      if (!param) continue;
+      const matches = String(param).match(/\d{6,}/g) || [];
+      for (const match of matches) add(match);
+    }
+  } catch {
+    // Bỏ qua URL lỗi, dùng regex bên dưới.
+  }
+
   const patterns = [
-    /\/posts\/(\d+)/i,
-    /\/videos\/(\d+)/i,
-    /story_fbid=(\d+)/i,
-    /\/photos\/[^/]+\/(\d+)/i,
-    /\/permalink\/(\d+)/i,
+    /\/posts\/(\d{6,})/gi,
+    /\/videos\/(\d{6,})/gi,
+    /\/photos\/[^/]+\/(\d{6,})/gi,
+    /\/permalink\/(\d{6,})/gi,
+    /story_fbid=(\d{6,})/gi,
+    /fbid=(\d{6,})/gi,
+    /[?&]id=(\d{6,})/gi,
   ];
 
   for (const pattern of patterns) {
-    const match = value.match(pattern);
-    if (match?.[1]) return match[1];
+    let match;
+    while ((match = pattern.exec(value)) !== null) add(match[1]);
   }
 
-  return crypto.createHash("sha256").update(value).digest("hex").slice(0, 24);
+  return ids;
 }
 
-function makePostFingerprint(post) {
-  const text = normalizeForSearch(post?.text || "")
-    .replace(/https?:\/\/\S+/g, " ")
-    .replace(/www\.\S+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function normalizePostUrl(url) {
+  try {
+    const parsed = new URL(String(url || ""), "https://www.facebook.com");
+    parsed.hash = "";
 
-  if (text.length >= 30 && text !== normalizeForSearch("Bài viết không có nội dung chữ.")) {
-    // Dùng nội dung thay vì URL vì Facebook hay đổi link /posts /photos /story_fbid.
-    // Không đưa tên page vào fingerprint để cùng một bài share/cross-post không bị gửi 4-5 lần.
-    return "text:" + crypto.createHash("sha256").update(text.slice(0, 1200)).digest("hex").slice(0, 24);
+    const ids = extractFacebookIds(parsed.toString());
+    if (ids.length > 0) {
+      return `https://www.facebook.com/post/${ids.join("-")}`;
+    }
+
+    const allowedParams = new Set(["story_fbid", "fbid", "id", "v"]);
+    for (const key of Array.from(parsed.searchParams.keys())) {
+      if (!allowedParams.has(key)) parsed.searchParams.delete(key);
+    }
+
+    return parsed.toString().replace(/\/$/, "");
+  } catch {
+    return String(url || "").trim();
+  }
+}
+
+function makePostKeys(post) {
+  const keys = new Set();
+  const author = normalizeForSearch(post?.author || "");
+  const textStrong = normalizeForDedup(post?.text || "");
+  const textLoose = normalizeForLooseDedup(post?.text || "");
+  const normalizedUrl = normalizePostUrl(post?.url || post?.normalizedUrl || "");
+  const ids = extractFacebookIds(post?.url || "");
+
+  for (const id of ids) {
+    keys.add(`uid:${id}`);
+    if (author) keys.add(`author-uid:${author}:${id}`);
   }
 
-  const fallback = [
-    post?.url || "",
-    post?.imageUrl || "",
-    post?.author || "",
-  ].join("|");
+  if (post?.uid) keys.add(`uid:${String(post.uid)}`);
+  if (normalizedUrl) keys.add(`url:${hashShort(normalizedUrl, 32)}`);
 
-  return "fallback:" + crypto.createHash("sha256").update(fallback).digest("hex").slice(0, 24);
+  // Lớp nội dung mạnh: cùng page + text gần nguyên bản.
+  if (author && textStrong.length >= 24) {
+    keys.add(`author-text:${author}:${hashShort(textStrong, 32)}`);
+  }
+
+  // Lớp nội dung mềm: bỏ hashtag/khoảng trắng/dấu câu phụ, chống Facebook đổi URL/ảnh.
+  if (author && textLoose.length >= 32) {
+    keys.add(`author-loose:${author}:${hashShort(textLoose, 32)}`);
+  }
+
+  // Lớp dòng đầu: nhiều bài thông báo có poster giống nhau nhưng dòng đầu là UID nội dung rất mạnh.
+  const firstLine = normalizeForLooseDedup(firstNonEmptyLine(post?.text || ""));
+  if (author && firstLine.length >= 16) {
+    keys.add(`author-firstline:${author}:${hashShort(firstLine, 32)}`);
+  }
+
+  // Lớp ảnh: chỉ phụ trợ, không dùng một mình nếu không có author.
+  const imageKey = normalizeImageUrl(post?.imageUrl || "");
+  if (author && imageKey) {
+    keys.add(`author-image:${author}:${hashShort(imageKey, 32)}`);
+  }
+
+  return Array.from(keys);
+}
+
+function normalizeForDedup(value) {
+  return normalizeForSearch(value)
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/#\S+/g, " ")
+    .replace(/\b\d{1,2}:\d{2}(:\d{2})?\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeForLooseDedup(value) {
+  return normalizeForDedup(value)
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\b(ngay|thang|nam|hoc|ky|dai|hoc|duy|tan)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function firstNonEmptyLine(value) {
+  return (
+    String(value || "")
+      .split("\n")
+      .map((line) => line.trim())
+      .find(Boolean) || ""
+  );
+}
+
+function normalizeImageUrl(value) {
+  const url = String(value || "").trim();
+  if (!url) return "";
+
+  try {
+    const parsed = new URL(url);
+    parsed.hash = "";
+
+    // Facebook CDN query đổi liên tục; giữ path là đủ để chống trùng theo ảnh.
+    parsed.search = "";
+    return parsed.hostname + parsed.pathname;
+  } catch {
+    return url.replace(/\?.*$/, "");
+  }
+}
+
+function hashShort(value, length = 24) {
+  return crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, length);
+}
+
+function isSeenPost(state, post) {
+  const keys = Array.isArray(post?.keys) ? post.keys : makePostKeys(post);
+  return keys.some((key) => state.seenKeys.has(key));
+}
+
+function rememberPost(state, post) {
+  const keys = Array.isArray(post?.keys) ? post.keys : makePostKeys(post);
+  const uid = post?.uid || post?.id || makePostUid(post?.url || "");
+
+  if (uid) state.ids.push(String(uid));
+  if (post?.url) state.urls.push(normalizePostUrl(post.url));
+  if (post?.fingerprint) state.fingerprints.push(String(post.fingerprint));
+
+  for (const key of keys) {
+    state.keys.push(key);
+    state.seenKeys.add(key);
+  }
+
+  state.records.push({
+    uid: String(uid || ""),
+    author: post?.author || "",
+    url: post?.url || "",
+    textHash: hashShort(normalizeForDedup(post?.text || ""), 24),
+    keys: keys.slice(0, 20),
+    seenAt: new Date().toISOString(),
+  });
+
+  trimState(state);
+}
+
+async function rememberVisiblePosts(state, posts) {
+  for (const post of posts) rememberPost(state, post);
+  state.initialized = true;
+  state.antiDuplicateVersion = ANTI_DUP_VERSION;
+  await saveStateObject(state);
 }
 
 async function sendPost(post, testMode) {
@@ -1071,35 +1235,99 @@ async function loadState() {
   try {
     const raw = await fs.readFile(STATE_FILE, "utf8");
     const value = JSON.parse(raw);
+
+    const ids = Array.isArray(value?.ids) ? value.ids.map(String) : [];
+    const urls = Array.isArray(value?.urls) ? value.urls.map(String) : [];
+    const keys = Array.isArray(value?.keys) ? value.keys.map(String) : [];
     const fingerprints = Array.isArray(value?.fingerprints)
       ? value.fingerprints.map(String)
       : [];
+    const records = Array.isArray(value?.records) ? value.records : [];
 
-    return {
+    const legacyKeys = [];
+    for (const id of ids) legacyKeys.push(`uid:${id}`);
+    for (const url of urls) legacyKeys.push(`url:${hashShort(normalizePostUrl(url), 32)}`);
+    for (const fingerprint of fingerprints) legacyKeys.push(`legacy-fp:${fingerprint}`);
+
+    const state = {
       initialized: value?.initialized === true,
-      ids: Array.isArray(value?.ids) ? value.ids.map(String) : [],
+      antiDuplicateVersion: Number(value?.antiDuplicateVersion || 0),
+      ids,
+      urls,
+      keys: keys.concat(legacyKeys),
       fingerprints,
-      hasFingerprints: Array.isArray(value?.fingerprints),
+      records,
+      seenKeys: new Set(keys.concat(legacyKeys)),
     };
+
+    trimState(state);
+    return state;
   } catch {
-    return { initialized: false, ids: [], fingerprints: [], hasFingerprints: false };
+    return {
+      initialized: false,
+      antiDuplicateVersion: 0,
+      ids: [],
+      urls: [],
+      keys: [],
+      fingerprints: [],
+      records: [],
+      seenKeys: new Set(),
+    };
   }
 }
 
-async function saveState(ids, initialized, fingerprints = []) {
-  const uniqueIds = Array.from(new Set(ids.filter(Boolean).map(String))).slice(-MAX_SEEN);
-  const uniqueFingerprints = Array.from(
-    new Set(fingerprints.filter(Boolean).map(String))
-  ).slice(-MAX_SEEN);
+async function saveState(ids, initialized) {
+  const state = await loadState();
+  state.initialized = initialized !== false;
+  for (const id of ids || []) {
+    if (!id) continue;
+    state.ids.push(String(id));
+    state.keys.push(`uid:${String(id)}`);
+  }
+  state.antiDuplicateVersion = ANTI_DUP_VERSION;
+  trimState(state);
+  await saveStateObject(state);
+}
+
+async function saveStateObject(state) {
+  trimState(state);
 
   const value = {
-    initialized: initialized !== false,
-    ids: uniqueIds,
-    fingerprints: uniqueFingerprints,
+    initialized: state.initialized !== false,
+    antiDuplicateVersion: ANTI_DUP_VERSION,
+    ids: uniqueLast(state.ids, MAX_SEEN),
+    urls: uniqueLast(state.urls, MAX_SEEN),
+    keys: uniqueLast(state.keys, MAX_SEEN * 8),
+    fingerprints: uniqueLast(state.fingerprints, MAX_SEEN),
+    records: state.records.slice(-MAX_SEEN),
     updatedAt: new Date().toISOString(),
   };
 
   await fs.writeFile(STATE_FILE, JSON.stringify(value, null, 2) + "\n", "utf8");
+}
+
+function trimState(state) {
+  state.ids = uniqueLast(state.ids || [], MAX_SEEN);
+  state.urls = uniqueLast(state.urls || [], MAX_SEEN);
+  state.keys = uniqueLast(state.keys || [], MAX_SEEN * 8);
+  state.fingerprints = uniqueLast(state.fingerprints || [], MAX_SEEN);
+  state.records = Array.isArray(state.records) ? state.records.slice(-MAX_SEEN) : [];
+  state.seenKeys = new Set(state.keys);
+}
+
+function uniqueLast(values, limit) {
+  const output = [];
+  const seen = new Set();
+
+  for (const value of Array.from(values || []).reverse()) {
+    const text = String(value || "").trim();
+    if (!text || seen.has(text)) continue;
+    seen.add(text);
+    output.push(text);
+    if (output.length >= limit) break;
+  }
+
+  return output.reverse();
 }
 
 function printSummary(value) {
