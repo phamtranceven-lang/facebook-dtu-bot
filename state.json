@@ -310,7 +310,6 @@
     "2fbcc2c70d4caea497cf1466",
     "7248e197da1e23f48e76c7f8",
     "ffb88a5468623bd7dace817b",
-    "48c51301e38e63c55aa0edeb",
     "a519c8da705a8ec1150d2b93",
     "f17ce5a6ac610bd31de5db45",
     "1611e54813f5a3284c9738f9",
@@ -323,7 +322,9 @@
     "719fdf334cf8120c1d42890d",
     "e0f284b1d0b8231bf71687b2",
     "79c054827e497723de21fcd1",
-    "9871b9866ea20509d910223b"
+    "9871b9866ea20509d910223b",
+    "48c51301e38e63c55aa0edeb",
+    "3756ea263123ba3b35612afa"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -510,7 +511,6 @@
     "https://www.facebook.com/DuyTanHTi/posts/pfbid02D7aBWQnq3u3ZH4cq84s4771VLhPGv5wyYPohmYCDySp7Hk1tJdnV7D5pT93KPi6xl",
     "https://www.facebook.com/tuyensinhDTU/posts/pfbid0VwFupjmiDNqHrNi2EXSFHLwHHNNLL6YNqnoo9XcYY7aCXQkG9TJCR4WRt92JKcnrl",
     "https://www.facebook.com/dtkt.dtu/posts/pfbid02Q4CARMCHeM6ZdRnamhfnP925X42jJyfYRxkpznkY569r7ZBDpEgwz3pNXWKvoZFTl",
-    "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid033i4uoLGc6DyTKDo12xy6hAhgyGG1kSWMJbekPpFEH8TAboFmiEwBBGDLpiZdfw5Ml",
     "https://www.facebook.com/Duy.Tan.University/posts/pfbid09tiVsLcoipyrtMW5aqQdR9m3PYhNMjhhdJhufVCuBt3XEuQjAjUT8kWuRbUvLtGGl",
     "https://www.facebook.com/tuyensinhDTU/posts/pfbid02xQCqg1fw1zGVHytgvMWAi1fAbtWAdFqbrHtqCA5Cr6a1EzhGS2mYnvUXw6z939Vql",
     "https://www.facebook.com/Duy.Tan.University/posts/pfbid0Yg3nzBWvDwikpYu3GKwJcVdnV3cLaDLPEuu3BYN7fgPWStVutEyVaCGqQcLzphZol",
@@ -523,7 +523,9 @@
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid02zi6YzUydCUURLRMXMeSyTkpPqwXydPuKtx85rdiQ5t6V7VJk4doovfNrhViEZo3bl",
     "https://www.facebook.com/dtkt.dtu/posts/pfbid0LWYyWBZvoBoq51HwupRUhrawAHgpaX1qSXjBygbnwF9LL8HY6iBcHDMhgrLzqmJAl",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid09ZvzbFAUCbTGCn1qish1Gitcfhdnpha9yKnYAQLifFPAQGZqGpCAhKn7m7E1ySc4l",
-    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02zj5ZSJmbZ7CuEHyhYcey98ZBk8Ym83CkP49PsM8uhLvDcRsyoVXy3XNjXbc68kQLl"
+    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02zj5ZSJmbZ7CuEHyhYcey98ZBk8Ym83CkP49PsM8uhLvDcRsyoVXy3XNjXbc68kQLl",
+    "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid033i4uoLGc6DyTKDo12xy6hAhgyGG1kSWMJbekPpFEH8TAboFmiEwBBGDLpiZdfw5Ml",
+    "https://www.facebook.com/TruongYDuocDHDT/posts/pfbid0NkQKf9wxdPHshR9AAdPYu4Xm4qmkEUcNd8UTqRnP1aoiXD2yiVyWJa8GZFA6fp6rl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -716,9 +718,6 @@
     "author-loose:dtu - truong dao tao quoc te:c3e48c64b2de1105229ac8e4ce160cc0",
     "author-firstline:dtu - truong dao tao quoc te:13342fac134270539bbf6b01f2a322b5",
     "author-image:dtu - truong dao tao quoc te:c33951bf877c91fc723ea4347d05b4f0",
-    "author-text:truong y duoc - dai hoc duy tan:f28cc3124cc696fe07d3ed53113a1f07",
-    "author-loose:truong y duoc - dai hoc duy tan:6b61a8b13d069e9cd7b713fcd2aecf38",
-    "author-firstline:truong y duoc - dai hoc duy tan:c22717a5d80d8b395011da23bb683c38",
     "author-image:truong y duoc - dai hoc duy tan:6d5c873e6a71846cc88c9855d984d24e",
     "author-text:tuyen sinh dai hoc duy tan:04f3b4845a18e7ce51501a8c08319688",
     "author-loose:tuyen sinh dai hoc duy tan:43ce70986687b083f3e3e59a1b43a62d",
@@ -860,7 +859,6 @@
     "author-image:duy tan university:bc336fd31b681adafa6b97db4f61cde9",
     "author-image:tuyen sinh dai hoc duy tan:2be4f9ae3e19913464d10ee3901ca713",
     "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:27113ba78c06df000df790465820c50a",
-    "author-image:tuoi tre truong cong nghe - dai hoc duy tan:e263d95c45a9a75fe5a182952aa1de58",
     "author-image:tuoi tre truong kinh te - dai hoc duy tan:e263d95c45a9a75fe5a182952aa1de58",
     "author-image:duy tan university:8f545f3f0fdfb3b20b70b48d8230c9ce",
     "author-image:tuyen sinh dai hoc duy tan:ba8cfcade2a7c1a004695f998ad32d2a",
@@ -1029,9 +1027,6 @@
     "author-image:tuoi tre truong kinh te - dai hoc duy tan:75c980443a5e2e74cdd17d21ce0c68ef",
     "author-image:truong du lich - dai hoc duy tan:bd7635211351e6b432d68680f236d3c7",
     "author-image:dtu - truong ngon ngu - xa hoi nhan van:ef196099cf4cb7163d02327c54879cf6",
-    "author-text:dtu - khoa khoa hoc xa hoi va nhan van:55da902e1e26a50cc01c02652699f8bb",
-    "author-loose:dtu - khoa khoa hoc xa hoi va nhan van:42738f330a47ad9a30cc453c1ff556e1",
-    "author-firstline:dtu - khoa khoa hoc xa hoi va nhan van:cb8fbcd86fdf389c85399036b27cfcbe",
     "author-image:dtu - khoa khoa hoc xa hoi va nhan van:9e9ffcf0a955b8916649262466b2c01b",
     "author-text:duy tan university:b83a35d7453dbdbc9f467da6d0fd4589",
     "author-loose:duy tan university:14107e119e57ac3dfc96664130e7b063",
@@ -1058,6 +1053,13 @@
     "author-image:tuoi tre truong kinh te - dai hoc duy tan:11e508ab502c7eb74f4a6b52c5f3a586",
     "author-image:tuyen sinh dai hoc duy tan:216c73402cecde41535ea458a1f8f245",
     "author-image:duy tan university:bc1f6490fe29d354f42397a392bf800c",
+    "author-image:duy tan university:f4b90b1a5ed44c716dda8f597bce9dc5",
+    "author-image:tuyen sinh dai hoc duy tan:203f6bbd2176448ea93a1b79299f2b40",
+    "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:cdc0bbcdd682776fe839be7545bef4c8",
+    "author-image:tuoi tre truong cong nghe - dai hoc duy tan:5482ad1305cec88a91158a248e848bba",
+    "author-image:tuoi tre truong kinh te - dai hoc duy tan:6e5a2faaa39ed2b350583c9aae84fe06",
+    "author-image:truong du lich - dai hoc duy tan:8f3e04703b28ed3bdd235d97d4fa060c",
+    "author-image:dtu - truong ngon ngu - xa hoi nhan van:ae82dfc33533ec820dcbf1bc18dfbe04",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -1366,7 +1368,6 @@
     "uid:2fbcc2c70d4caea497cf1466",
     "uid:7248e197da1e23f48e76c7f8",
     "uid:ffb88a5468623bd7dace817b",
-    "uid:48c51301e38e63c55aa0edeb",
     "uid:a519c8da705a8ec1150d2b93",
     "uid:f17ce5a6ac610bd31de5db45",
     "uid:1611e54813f5a3284c9738f9",
@@ -1557,7 +1558,6 @@
     "url:2fbcc2c70d4caea497cf1466adaf4488",
     "url:7248e197da1e23f48e76c7f86ba25538",
     "url:ffb88a5468623bd7dace817b084fe0f6",
-    "url:48c51301e38e63c55aa0edebe5d3f60c",
     "url:a519c8da705a8ec1150d2b93720b86fe",
     "url:f17ce5a6ac610bd31de5db45211abd23",
     "url:1611e54813f5a3284c9738f9af9d973b",
@@ -1677,11 +1677,6 @@
     "legacy-fp:6a106becdf6c00f8eb594b7927d2dc13",
     "legacy-fp:40f4bba7d0be32132144f287ab66500e",
     "legacy-fp:a9b0bf6c220519e010ff52b417985ad4",
-    "legacy-fp:2ac40c546b6964eac837f717ef431411",
-    "legacy-fp:a7c2460d72f79ccb51e88c93494f9c88",
-    "legacy-fp:4ec860614479b7ac3942987c086bbcd5",
-    "legacy-fp:47e1e648ffc8f3b01f87b3733d592420",
-    "legacy-fp:e9f8907162e92c9924eaed3877e21989",
     "legacy-fp:55da902e1e26a50cc01c02652699f8bb",
     "legacy-fp:b83a35d7453dbdbc9f467da6d0fd4589",
     "legacy-fp:a6f89b266431b196a405b3a33b6b9ae8",
@@ -1689,50 +1684,67 @@
     "legacy-fp:4c7d40b21de5d06bdc62fc5d3a0ca61d",
     "legacy-fp:c8e4f594bc05e6a4a931540d58e41b27",
     "legacy-fp:b724d5c2dd76de582b3972a9bf92d63d",
-    "legacy-fp:3c2a42c924b8b49102873a6dbc353690",
     "legacy-fp:b593654e9536549bb8690e23bdb469f1",
+    "legacy-fp:3c2a42c924b8b49102873a6dbc353690",
+    "legacy-fp:2ac40c546b6964eac837f717ef431411",
+    "legacy-fp:a7c2460d72f79ccb51e88c93494f9c88",
+    "legacy-fp:4ec860614479b7ac3942987c086bbcd5",
+    "legacy-fp:47e1e648ffc8f3b01f87b3733d592420",
+    "legacy-fp:e9f8907162e92c9924eaed3877e21989",
     "uid:78570ddcb89867c1984b9b9a",
     "url:78570ddcb89867c1984b9b9a6e06dbe6",
     "author-text:duy tan university:b593654e9536549bb8690e23bdb469f1",
     "author-loose:duy tan university:0b2ea62c0b95303fd931ae1d476326b0",
     "author-firstline:duy tan university:7941bc901f0c80a188a6c80efe237c3c",
-    "author-image:duy tan university:f4b90b1a5ed44c716dda8f597bce9dc5",
+    "author-image:duy tan university:849aa3b8573c4a461a175ce1c87fd317",
     "uid:33c3f2eb50bdd4dd5f40a2d8",
     "url:33c3f2eb50bdd4dd5f40a2d8e841447c",
     "author-text:tuyen sinh dai hoc duy tan:3c2a42c924b8b49102873a6dbc353690",
     "author-loose:tuyen sinh dai hoc duy tan:80dc2c9ae96d6c17c0558cc9e69efad0",
     "author-firstline:tuyen sinh dai hoc duy tan:e67a63eedc0407ad07e825308e7331b9",
-    "author-image:tuyen sinh dai hoc duy tan:203f6bbd2176448ea93a1b79299f2b40",
+    "author-image:tuyen sinh dai hoc duy tan:1c5efefefc5b313bfe8e2598da3130ff",
     "uid:3e4a107c5f500e099e0798c9",
     "url:3e4a107c5f500e099e0798c98276ac35",
     "author-text:dtu - truong khoa hoc may tinh va tri tue nhan tao:2ac40c546b6964eac837f717ef431411",
     "author-loose:dtu - truong khoa hoc may tinh va tri tue nhan tao:83121e51ce0d7fa08426cbbe2152975b",
     "author-firstline:dtu - truong khoa hoc may tinh va tri tue nhan tao:83121e51ce0d7fa08426cbbe2152975b",
-    "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:cdc0bbcdd682776fe839be7545bef4c8",
+    "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:8db794e6cea1496d2e34136cd73052d3",
     "uid:719fdf334cf8120c1d42890d",
     "url:719fdf334cf8120c1d42890dc96008e8",
     "author-text:tuoi tre truong cong nghe - dai hoc duy tan:a7c2460d72f79ccb51e88c93494f9c88",
     "author-loose:tuoi tre truong cong nghe - dai hoc duy tan:19fde1c8efbadd6e7bbcd21a1575c8ff",
     "author-firstline:tuoi tre truong cong nghe - dai hoc duy tan:235d5ae913e3bff6738f9836c319c998",
-    "author-image:tuoi tre truong cong nghe - dai hoc duy tan:5482ad1305cec88a91158a248e848bba",
+    "author-image:tuoi tre truong cong nghe - dai hoc duy tan:e263d95c45a9a75fe5a182952aa1de58",
     "uid:e0f284b1d0b8231bf71687b2",
     "url:e0f284b1d0b8231bf71687b2041e47b4",
     "author-text:tuoi tre truong kinh te - dai hoc duy tan:4ec860614479b7ac3942987c086bbcd5",
     "author-loose:tuoi tre truong kinh te - dai hoc duy tan:6019fa361cfffbc446688759b305e747",
     "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:0031e022bc1226daf6c2f7d21ec1b2fd",
-    "author-image:tuoi tre truong kinh te - dai hoc duy tan:6e5a2faaa39ed2b350583c9aae84fe06",
+    "author-image:tuoi tre truong kinh te - dai hoc duy tan:a2e88533240ef6665c187cc77f3a30e4",
     "uid:79c054827e497723de21fcd1",
     "url:79c054827e497723de21fcd13422dcc1",
     "author-text:truong du lich - dai hoc duy tan:47e1e648ffc8f3b01f87b3733d592420",
     "author-loose:truong du lich - dai hoc duy tan:d74e139b90d8b6e135259d02e053ad10",
     "author-firstline:truong du lich - dai hoc duy tan:e5101ccce83293c9306b58cda0ad655e",
-    "author-image:truong du lich - dai hoc duy tan:8f3e04703b28ed3bdd235d97d4fa060c",
+    "author-image:truong du lich - dai hoc duy tan:6d9f08c96ae67c29bdf405eed9bfd02e",
     "uid:9871b9866ea20509d910223b",
     "url:9871b9866ea20509d910223b6ce42ac7",
     "author-text:dtu - truong ngon ngu - xa hoi nhan van:e9f8907162e92c9924eaed3877e21989",
     "author-loose:dtu - truong ngon ngu - xa hoi nhan van:f1a94a0bac69de455b04a957cce2e0aa",
     "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:64df6b04caf845ab9fd463dab880661f",
-    "author-image:dtu - truong ngon ngu - xa hoi nhan van:ae82dfc33533ec820dcbf1bc18dfbe04"
+    "author-image:dtu - truong ngon ngu - xa hoi nhan van:6cf804486c1130b20c5fe4a1bd5c11ea",
+    "uid:48c51301e38e63c55aa0edeb",
+    "url:48c51301e38e63c55aa0edebe5d3f60c",
+    "author-text:dtu - khoa khoa hoc xa hoi va nhan van:55da902e1e26a50cc01c02652699f8bb",
+    "author-loose:dtu - khoa khoa hoc xa hoi va nhan van:42738f330a47ad9a30cc453c1ff556e1",
+    "author-firstline:dtu - khoa khoa hoc xa hoi va nhan van:cb8fbcd86fdf389c85399036b27cfcbe",
+    "author-image:dtu - khoa khoa hoc xa hoi va nhan van:2721853d70c729446e76e2044efd2132",
+    "uid:3756ea263123ba3b35612afa",
+    "url:3756ea263123ba3b35612afa75ea45c3",
+    "author-text:truong y duoc - dai hoc duy tan:f28cc3124cc696fe07d3ed53113a1f07",
+    "author-loose:truong y duoc - dai hoc duy tan:6b61a8b13d069e9cd7b713fcd2aecf38",
+    "author-firstline:truong y duoc - dai hoc duy tan:c22717a5d80d8b395011da23bb683c38",
+    "author-image:truong y duoc - dai hoc duy tan:2240596657f0268bb3580e1841045ced"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -1793,7 +1805,6 @@
     "ee2f54e13c739bab8200489fe75e75d3",
     "736489d8ed43246ff40019e467f5b441",
     "f5bc7dbebe2aad8b26dcf08e4213dfe8",
-    "f28cc3124cc696fe07d3ed53113a1f07",
     "04f3b4845a18e7ce51501a8c08319688",
     "1109aba68d6a81a5f9250420fadde823",
     "31e3fcae19720ffa01734821024f6d30",
@@ -1848,7 +1859,6 @@
     "6a106becdf6c00f8eb594b7927d2dc13",
     "40f4bba7d0be32132144f287ab66500e",
     "a9b0bf6c220519e010ff52b417985ad4",
-    "55da902e1e26a50cc01c02652699f8bb",
     "b83a35d7453dbdbc9f467da6d0fd4589",
     "a6f89b266431b196a405b3a33b6b9ae8",
     "cdeb6f92b08a5b0c74b2ee927c4374f4",
@@ -1861,7 +1871,9 @@
     "a7c2460d72f79ccb51e88c93494f9c88",
     "4ec860614479b7ac3942987c086bbcd5",
     "47e1e648ffc8f3b01f87b3733d592420",
-    "e9f8907162e92c9924eaed3877e21989"
+    "e9f8907162e92c9924eaed3877e21989",
+    "55da902e1e26a50cc01c02652699f8bb",
+    "f28cc3124cc696fe07d3ed53113a1f07"
   ],
   "records": [
     {
@@ -7356,7 +7368,142 @@
         "author-image:dtu - truong ngon ngu - xa hoi nhan van:ae82dfc33533ec820dcbf1bc18dfbe04"
       ],
       "seenAt": "2026-06-24T12:41:54.903Z"
+    },
+    {
+      "uid": "78570ddcb89867c1984b9b9a",
+      "author": "Duy Tan University",
+      "url": "https://www.facebook.com/Duy.Tan.University/posts/pfbid0XYJdyQohBmsUJJtGY28K8G1Nbcm515f7JPfpCJKiusKjkX7xQBYVFfLiNBCRAYhKl",
+      "textHash": "b593654e9536549bb8690e23",
+      "keys": [
+        "uid:78570ddcb89867c1984b9b9a",
+        "url:78570ddcb89867c1984b9b9a6e06dbe6",
+        "author-text:duy tan university:b593654e9536549bb8690e23bdb469f1",
+        "author-loose:duy tan university:0b2ea62c0b95303fd931ae1d476326b0",
+        "author-firstline:duy tan university:7941bc901f0c80a188a6c80efe237c3c",
+        "author-image:duy tan university:849aa3b8573c4a461a175ce1c87fd317"
+      ],
+      "seenAt": "2026-06-24T14:42:19.578Z"
+    },
+    {
+      "uid": "33c3f2eb50bdd4dd5f40a2d8",
+      "author": "Tuyển sinh Đại học Duy Tân",
+      "url": "https://www.facebook.com/tuyensinhDTU/posts/pfbid0jNMyKLQoN9puzpfPCVkGpnLSJuTBvx7NEX9ac8uc8aouyjMMhuDvxCLGkLmGn8bXl",
+      "textHash": "3c2a42c924b8b49102873a6d",
+      "keys": [
+        "uid:33c3f2eb50bdd4dd5f40a2d8",
+        "url:33c3f2eb50bdd4dd5f40a2d8e841447c",
+        "author-text:tuyen sinh dai hoc duy tan:3c2a42c924b8b49102873a6dbc353690",
+        "author-loose:tuyen sinh dai hoc duy tan:80dc2c9ae96d6c17c0558cc9e69efad0",
+        "author-firstline:tuyen sinh dai hoc duy tan:e67a63eedc0407ad07e825308e7331b9",
+        "author-image:tuyen sinh dai hoc duy tan:1c5efefefc5b313bfe8e2598da3130ff"
+      ],
+      "seenAt": "2026-06-24T14:42:19.579Z"
+    },
+    {
+      "uid": "3e4a107c5f500e099e0798c9",
+      "author": "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
+      "url": "https://www.facebook.com/truongkhoahocmaytinh/posts/pfbid02zoEFz1T2qJMt4tw6iCVZSGTJQro8qkhPpAPwmc8Tiqao9nb1puNZQmL6R8xewFDXl",
+      "textHash": "2ac40c546b6964eac837f717",
+      "keys": [
+        "uid:3e4a107c5f500e099e0798c9",
+        "url:3e4a107c5f500e099e0798c98276ac35",
+        "author-text:dtu - truong khoa hoc may tinh va tri tue nhan tao:2ac40c546b6964eac837f717ef431411",
+        "author-loose:dtu - truong khoa hoc may tinh va tri tue nhan tao:83121e51ce0d7fa08426cbbe2152975b",
+        "author-firstline:dtu - truong khoa hoc may tinh va tri tue nhan tao:83121e51ce0d7fa08426cbbe2152975b",
+        "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:8db794e6cea1496d2e34136cd73052d3"
+      ],
+      "seenAt": "2026-06-24T14:42:19.580Z"
+    },
+    {
+      "uid": "719fdf334cf8120c1d42890d",
+      "author": "Tuổi trẻ Trường Công nghệ - Đại học Duy Tân",
+      "url": "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid02zi6YzUydCUURLRMXMeSyTkpPqwXydPuKtx85rdiQ5t6V7VJk4doovfNrhViEZo3bl",
+      "textHash": "a7c2460d72f79ccb51e88c93",
+      "keys": [
+        "uid:719fdf334cf8120c1d42890d",
+        "url:719fdf334cf8120c1d42890dc96008e8",
+        "author-text:tuoi tre truong cong nghe - dai hoc duy tan:a7c2460d72f79ccb51e88c93494f9c88",
+        "author-loose:tuoi tre truong cong nghe - dai hoc duy tan:19fde1c8efbadd6e7bbcd21a1575c8ff",
+        "author-firstline:tuoi tre truong cong nghe - dai hoc duy tan:235d5ae913e3bff6738f9836c319c998",
+        "author-image:tuoi tre truong cong nghe - dai hoc duy tan:e263d95c45a9a75fe5a182952aa1de58"
+      ],
+      "seenAt": "2026-06-24T14:42:19.581Z"
+    },
+    {
+      "uid": "e0f284b1d0b8231bf71687b2",
+      "author": "Tuổi trẻ Trường Kinh tế - Đại học Duy Tân",
+      "url": "https://www.facebook.com/dtkt.dtu/posts/pfbid0LWYyWBZvoBoq51HwupRUhrawAHgpaX1qSXjBygbnwF9LL8HY6iBcHDMhgrLzqmJAl",
+      "textHash": "4ec860614479b7ac3942987c",
+      "keys": [
+        "uid:e0f284b1d0b8231bf71687b2",
+        "url:e0f284b1d0b8231bf71687b2041e47b4",
+        "author-text:tuoi tre truong kinh te - dai hoc duy tan:4ec860614479b7ac3942987c086bbcd5",
+        "author-loose:tuoi tre truong kinh te - dai hoc duy tan:6019fa361cfffbc446688759b305e747",
+        "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:0031e022bc1226daf6c2f7d21ec1b2fd",
+        "author-image:tuoi tre truong kinh te - dai hoc duy tan:a2e88533240ef6665c187cc77f3a30e4"
+      ],
+      "seenAt": "2026-06-24T14:42:19.581Z"
+    },
+    {
+      "uid": "79c054827e497723de21fcd1",
+      "author": "Trường Du lịch - Đại học Duy Tân",
+      "url": "https://www.facebook.com/DuyTanHTi/posts/pfbid09ZvzbFAUCbTGCn1qish1Gitcfhdnpha9yKnYAQLifFPAQGZqGpCAhKn7m7E1ySc4l",
+      "textHash": "47e1e648ffc8f3b01f87b373",
+      "keys": [
+        "uid:79c054827e497723de21fcd1",
+        "url:79c054827e497723de21fcd13422dcc1",
+        "author-text:truong du lich - dai hoc duy tan:47e1e648ffc8f3b01f87b3733d592420",
+        "author-loose:truong du lich - dai hoc duy tan:d74e139b90d8b6e135259d02e053ad10",
+        "author-firstline:truong du lich - dai hoc duy tan:e5101ccce83293c9306b58cda0ad655e",
+        "author-image:truong du lich - dai hoc duy tan:6d9f08c96ae67c29bdf405eed9bfd02e"
+      ],
+      "seenAt": "2026-06-24T14:42:19.582Z"
+    },
+    {
+      "uid": "9871b9866ea20509d910223b",
+      "author": "DTU - Trường Ngôn ngữ - Xã hội Nhân văn",
+      "url": "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02zj5ZSJmbZ7CuEHyhYcey98ZBk8Ym83CkP49PsM8uhLvDcRsyoVXy3XNjXbc68kQLl",
+      "textHash": "e9f8907162e92c9924eaed38",
+      "keys": [
+        "uid:9871b9866ea20509d910223b",
+        "url:9871b9866ea20509d910223b6ce42ac7",
+        "author-text:dtu - truong ngon ngu - xa hoi nhan van:e9f8907162e92c9924eaed3877e21989",
+        "author-loose:dtu - truong ngon ngu - xa hoi nhan van:f1a94a0bac69de455b04a957cce2e0aa",
+        "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:64df6b04caf845ab9fd463dab880661f",
+        "author-image:dtu - truong ngon ngu - xa hoi nhan van:6cf804486c1130b20c5fe4a1bd5c11ea"
+      ],
+      "seenAt": "2026-06-24T14:42:19.582Z"
+    },
+    {
+      "uid": "48c51301e38e63c55aa0edeb",
+      "author": "DTU - Khoa Khoa học Xã hội và Nhân văn",
+      "url": "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid033i4uoLGc6DyTKDo12xy6hAhgyGG1kSWMJbekPpFEH8TAboFmiEwBBGDLpiZdfw5Ml",
+      "textHash": "55da902e1e26a50cc01c0265",
+      "keys": [
+        "uid:48c51301e38e63c55aa0edeb",
+        "url:48c51301e38e63c55aa0edebe5d3f60c",
+        "author-text:dtu - khoa khoa hoc xa hoi va nhan van:55da902e1e26a50cc01c02652699f8bb",
+        "author-loose:dtu - khoa khoa hoc xa hoi va nhan van:42738f330a47ad9a30cc453c1ff556e1",
+        "author-firstline:dtu - khoa khoa hoc xa hoi va nhan van:cb8fbcd86fdf389c85399036b27cfcbe",
+        "author-image:dtu - khoa khoa hoc xa hoi va nhan van:2721853d70c729446e76e2044efd2132"
+      ],
+      "seenAt": "2026-06-24T14:42:19.583Z"
+    },
+    {
+      "uid": "3756ea263123ba3b35612afa",
+      "author": "Trường Y Dược - Đại học Duy Tân",
+      "url": "https://www.facebook.com/TruongYDuocDHDT/posts/pfbid0NkQKf9wxdPHshR9AAdPYu4Xm4qmkEUcNd8UTqRnP1aoiXD2yiVyWJa8GZFA6fp6rl",
+      "textHash": "f28cc3124cc696fe07d3ed53",
+      "keys": [
+        "uid:3756ea263123ba3b35612afa",
+        "url:3756ea263123ba3b35612afa75ea45c3",
+        "author-text:truong y duoc - dai hoc duy tan:f28cc3124cc696fe07d3ed53113a1f07",
+        "author-loose:truong y duoc - dai hoc duy tan:6b61a8b13d069e9cd7b713fcd2aecf38",
+        "author-firstline:truong y duoc - dai hoc duy tan:c22717a5d80d8b395011da23bb683c38",
+        "author-image:truong y duoc - dai hoc duy tan:2240596657f0268bb3580e1841045ced"
+      ],
+      "seenAt": "2026-06-24T14:42:19.583Z"
     }
   ],
-  "updatedAt": "2026-06-24T12:41:54.904Z"
+  "updatedAt": "2026-06-24T14:42:19.584Z"
 }
