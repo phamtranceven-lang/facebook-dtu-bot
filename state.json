@@ -581,7 +581,9 @@
     "32c9fc29718a7a8d0f64b5c0",
     "85fc79ca7c5bd8f775fa012d",
     "07c2125818260d9b24ee739a",
-    "82c755dc7379ca341b461ba2"
+    "82c755dc7379ca341b461ba2",
+    "25b2151d94a5989e5896aef3",
+    "78d9e7e4d1a9fe2eff8ebe7d"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -1039,7 +1041,9 @@
     "https://www.facebook.com/Duy.Tan.University/posts/pfbid04TYUvfy3ZMsfFWwdFbre8yPr3bm5QqbuhDfhUYxENVwRwxjBPJs7o9mBD6r7Tjn5l",
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid03aS5mpkX5kBb9BS3UMf1StzGbPok4Um4iQHAzQ23xWF8fnvcCS2yPa1MMdQUwBu5l",
     "https://www.facebook.com/tuyensinhDTU/posts/pfbid026SYJ7dATrzwayKBDLgae6MmSHAVUipxiQ71L1mn3HjiVbFEyNu8pbnjnjEN93k7Cl",
-    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02GXaXoKH98r86LZosAeTR6aFBvuCPyvp8YkHxRwdGJuteUXyjbe319ZKBtQEJ4N7ul"
+    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02GXaXoKH98r86LZosAeTR6aFBvuCPyvp8YkHxRwdGJuteUXyjbe319ZKBtQEJ4N7ul",
+    "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid0QNmWEVZ3rV8SbzrqqY4ycMoC5rhd7jjdioy3QdfjPSDCmCTxNrgUd22nZxoM3awSl",
+    "https://www.facebook.com/tuyensinhDTU/posts/pfbid0FGr3koAW7bXU13i3xHgnAmVckXr2ZzxfEwQumVH2ogimuv3QWtZaQcP9cb1NHTwhl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -2166,6 +2170,17 @@
     "author-loose:duy tan university:1fa2f9235589ca57ee0ce6b8d97529d4",
     "author-firstline:duy tan university:052f7716c1ba855333d0109b4e04849f",
     "author-image:duy tan university:39c53c5cf5cfdaf6b82fba0d37069116",
+    "author-text:dtu - truong ngon ngu - xa hoi nhan van:d91808bc48e8620ab2d8591fed9f2dae",
+    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:ba3f4ed393e1bd9c6af3f3f588675f8c",
+    "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:3e11421743f06ac2541fc80562e14a01",
+    "author-image:dtu - truong ngon ngu - xa hoi nhan van:cd487b665d3918299867028ba1611e13",
+    "author-text:tuyen sinh dai hoc duy tan:fe96a0a3d206f7fa1a88ac828ed438d8",
+    "author-loose:tuyen sinh dai hoc duy tan:3b0617fafadcf59626756eb2f980d0b4",
+    "author-firstline:tuyen sinh dai hoc duy tan:c763860887a3d5d2944bb2344d1c46bb",
+    "author-text:duy tan university:2bebc38ee87b2b96e6cd934f63744009",
+    "author-loose:duy tan university:e99f542c9f70cbdc310c511f3f325393",
+    "author-firstline:duy tan university:b05c6de12234c370b4494ac0056fd1da",
+    "author-image:duy tan university:c8c3841ef15f4e7ae182b54e4a4b245b",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -2743,6 +2758,9 @@
     "uid:1d4f7971f8aa6dccd4b83931",
     "uid:06e98ae70e67c63032247495",
     "uid:32c9fc29718a7a8d0f64b5c0",
+    "uid:85fc79ca7c5bd8f775fa012d",
+    "uid:07c2125818260d9b24ee739a",
+    "uid:82c755dc7379ca341b461ba2",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -3196,6 +3214,9 @@
     "url:1d4f7971f8aa6dccd4b83931d98ff9f9",
     "url:06e98ae70e67c6303224749544bf1921",
     "url:32c9fc29718a7a8d0f64b5c0706cb9b8",
+    "url:85fc79ca7c5bd8f775fa012d40eb9464",
+    "url:07c2125818260d9b24ee739a3aced105",
+    "url:82c755dc7379ca341b461ba28c8d9260",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -3422,23 +3443,21 @@
     "legacy-fp:c2563998e526453ae56d6141909fa41e",
     "legacy-fp:49286d1287b6b9c53cd0597de735d0c9",
     "legacy-fp:c9a5d5ce63ffbec778e3e9758338557a",
-    "uid:85fc79ca7c5bd8f775fa012d",
-    "url:85fc79ca7c5bd8f775fa012d40eb9464",
-    "author-text:dtu - truong ngon ngu - xa hoi nhan van:d91808bc48e8620ab2d8591fed9f2dae",
-    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:ba3f4ed393e1bd9c6af3f3f588675f8c",
-    "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:3e11421743f06ac2541fc80562e14a01",
-    "author-image:dtu - truong ngon ngu - xa hoi nhan van:cd487b665d3918299867028ba1611e13",
-    "uid:07c2125818260d9b24ee739a",
-    "url:07c2125818260d9b24ee739a3aced105",
-    "author-text:tuyen sinh dai hoc duy tan:fe96a0a3d206f7fa1a88ac828ed438d8",
-    "author-loose:tuyen sinh dai hoc duy tan:3b0617fafadcf59626756eb2f980d0b4",
-    "author-firstline:tuyen sinh dai hoc duy tan:c763860887a3d5d2944bb2344d1c46bb",
-    "uid:82c755dc7379ca341b461ba2",
-    "url:82c755dc7379ca341b461ba28c8d9260",
-    "author-text:duy tan university:2bebc38ee87b2b96e6cd934f63744009",
-    "author-loose:duy tan university:e99f542c9f70cbdc310c511f3f325393",
-    "author-firstline:duy tan university:b05c6de12234c370b4494ac0056fd1da",
-    "author-image:duy tan university:c8c3841ef15f4e7ae182b54e4a4b245b"
+    "legacy-fp:d91808bc48e8620ab2d8591fed9f2dae",
+    "legacy-fp:fe96a0a3d206f7fa1a88ac828ed438d8",
+    "legacy-fp:2bebc38ee87b2b96e6cd934f63744009",
+    "uid:25b2151d94a5989e5896aef3",
+    "url:25b2151d94a5989e5896aef3f4a373c7",
+    "author-text:dtu - khoa khoa hoc xa hoi va nhan van:ac645a11d0a220a82b68d902c621a223",
+    "author-loose:dtu - khoa khoa hoc xa hoi va nhan van:8bfb6599d57d73cd5d9359292978a214",
+    "author-firstline:dtu - khoa khoa hoc xa hoi va nhan van:a42010447717d08f15a8a689e64a0a4d",
+    "author-image:dtu - khoa khoa hoc xa hoi va nhan van:d2566560216992a5f850a03b9e77f21d",
+    "uid:78d9e7e4d1a9fe2eff8ebe7d",
+    "url:78d9e7e4d1a9fe2eff8ebe7d2cf9e4a0",
+    "author-text:tuyen sinh dai hoc duy tan:b0747028cdd570598b3f269169e43919",
+    "author-loose:tuyen sinh dai hoc duy tan:b15cc23958aa53213f413223d01cabd3",
+    "author-firstline:tuyen sinh dai hoc duy tan:da1abc4935d5beb13321b5a1e7ed7fd2",
+    "author-image:tuyen sinh dai hoc duy tan:05a5062299562841f282dec1f5e45ef3"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -3669,7 +3688,9 @@
     "c9a5d5ce63ffbec778e3e9758338557a",
     "d91808bc48e8620ab2d8591fed9f2dae",
     "fe96a0a3d206f7fa1a88ac828ed438d8",
-    "2bebc38ee87b2b96e6cd934f63744009"
+    "2bebc38ee87b2b96e6cd934f63744009",
+    "ac645a11d0a220a82b68d902c621a223",
+    "b0747028cdd570598b3f269169e43919"
   ],
   "records": [
     {
@@ -16894,7 +16915,37 @@
         "author-image:duy tan university:c8c3841ef15f4e7ae182b54e4a4b245b"
       ],
       "seenAt": "2026-07-08T04:41:12.979Z"
+    },
+    {
+      "uid": "25b2151d94a5989e5896aef3",
+      "author": "DTU - Khoa Khoa học Xã hội và Nhân văn",
+      "url": "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid0QNmWEVZ3rV8SbzrqqY4ycMoC5rhd7jjdioy3QdfjPSDCmCTxNrgUd22nZxoM3awSl",
+      "textHash": "ac645a11d0a220a82b68d902",
+      "keys": [
+        "uid:25b2151d94a5989e5896aef3",
+        "url:25b2151d94a5989e5896aef3f4a373c7",
+        "author-text:dtu - khoa khoa hoc xa hoi va nhan van:ac645a11d0a220a82b68d902c621a223",
+        "author-loose:dtu - khoa khoa hoc xa hoi va nhan van:8bfb6599d57d73cd5d9359292978a214",
+        "author-firstline:dtu - khoa khoa hoc xa hoi va nhan van:a42010447717d08f15a8a689e64a0a4d",
+        "author-image:dtu - khoa khoa hoc xa hoi va nhan van:d2566560216992a5f850a03b9e77f21d"
+      ],
+      "seenAt": "2026-07-08T06:41:15.155Z"
+    },
+    {
+      "uid": "78d9e7e4d1a9fe2eff8ebe7d",
+      "author": "Tuyển sinh Đại học Duy Tân",
+      "url": "https://www.facebook.com/tuyensinhDTU/posts/pfbid0FGr3koAW7bXU13i3xHgnAmVckXr2ZzxfEwQumVH2ogimuv3QWtZaQcP9cb1NHTwhl",
+      "textHash": "b0747028cdd570598b3f2691",
+      "keys": [
+        "uid:78d9e7e4d1a9fe2eff8ebe7d",
+        "url:78d9e7e4d1a9fe2eff8ebe7d2cf9e4a0",
+        "author-text:tuyen sinh dai hoc duy tan:b0747028cdd570598b3f269169e43919",
+        "author-loose:tuyen sinh dai hoc duy tan:b15cc23958aa53213f413223d01cabd3",
+        "author-firstline:tuyen sinh dai hoc duy tan:da1abc4935d5beb13321b5a1e7ed7fd2",
+        "author-image:tuyen sinh dai hoc duy tan:05a5062299562841f282dec1f5e45ef3"
+      ],
+      "seenAt": "2026-07-08T06:41:17.237Z"
     }
   ],
-  "updatedAt": "2026-07-08T04:41:12.981Z"
+  "updatedAt": "2026-07-08T06:41:17.238Z"
 }
