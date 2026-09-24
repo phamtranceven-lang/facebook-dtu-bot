@@ -8225,6 +8225,10 @@
     "author-loose:duy tan university:6e0ef753db37c92f7a3e532c78a3d087",
     "author-firstline:duy tan university:1ecaed6dab6b2cfdcc6889714b778b25",
     "author-image:duy tan university:2369f4c931b9a3dd4e97b040ee6fb7f8",
+    "author-text:tuyen sinh dai hoc duy tan:1e41d66b65909313d2237528d047f0ca",
+    "author-loose:tuyen sinh dai hoc duy tan:01996b2032474f5cebbed9e3ff220255",
+    "author-firstline:tuyen sinh dai hoc duy tan:234d2fdc1d41fe731f27258e549c3401",
+    "author-image:tuyen sinh dai hoc duy tan:390519124ad43a7c19047b8531845288",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -10310,6 +10314,7 @@
     "uid:4e746048cfe29c1c31d3d08a",
     "uid:337614cb9072e3a790f2c733",
     "uid:03df8b1ff8e8fef47099f841",
+    "uid:1b7da319b8b52b7a13ed513e",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -12271,6 +12276,7 @@
     "url:4e746048cfe29c1c31d3d08a616f5118",
     "url:337614cb9072e3a790f2c73358c6f4aa",
     "url:03df8b1ff8e8fef47099f841d301e68b",
+    "url:1b7da319b8b52b7a13ed513e29ae7909",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -13035,12 +13041,7 @@
     "legacy-fp:3e985324b7991da0fd8da134ca1ee07e",
     "legacy-fp:7765b71d8f5167149cacd813ff9d6e1b",
     "legacy-fp:c201b53f71a82a8953f3d65540915042",
-    "uid:1b7da319b8b52b7a13ed513e",
-    "url:1b7da319b8b52b7a13ed513e29ae7909",
-    "author-text:tuyen sinh dai hoc duy tan:1e41d66b65909313d2237528d047f0ca",
-    "author-loose:tuyen sinh dai hoc duy tan:01996b2032474f5cebbed9e3ff220255",
-    "author-firstline:tuyen sinh dai hoc duy tan:234d2fdc1d41fe731f27258e549c3401",
-    "author-image:tuyen sinh dai hoc duy tan:390519124ad43a7c19047b8531845288"
+    "legacy-fp:1e41d66b65909313d2237528d047f0ca"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -77782,5 +77783,5 @@
       "seenAt": "2026-09-24T04:40:38.974Z"
     }
   ],
-  "updatedAt": "2026-09-24T04:40:38.980Z"
+  "updatedAt": "2026-09-24T06:39:37.550Z"
 }
