@@ -2141,7 +2141,8 @@
     "764f7c052429977916dafbe6",
     "f99590b94138c5c572cf8ed3",
     "2879ee8b37ec57185d090c70",
-    "40434bcea805b02a7b168118"
+    "40434bcea805b02a7b168118",
+    "00a497e0baa7c6423b8d2c29"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -4159,7 +4160,8 @@
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid02hE8j37DoEaHD3ZhBtzU2yzA5EvDoynXbzVVqFqs1f166BGq1jmEevrZoCRSPwWZPl",
     "https://www.facebook.com/dtkt.dtu/posts/pfbid02DJz497t5PKBsKBr1a8A7PQLziykgPh9VoBKsqrn2mFRXfyR6N8kq7TBpBtAe1bwrl",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid02N52jpQBqqo3Pan2wX4oNwEugZVVcCgk4aQN2fWYT7MgVYQ3aNb8Ka3db1eJwK5oul",
-    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0FwszyK3pNpoQBDoui3bJswmDWtxyxG6VQK757C7DWGyHk23eZZuqmsa2skA5zmZSl"
+    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0FwszyK3pNpoQBDoui3bJswmDWtxyxG6VQK757C7DWGyHk23eZZuqmsa2skA5zmZSl",
+    "https://www.facebook.com/tuyensinhDTU/posts/pfbid0P8qvX6dLtWuRXSD6CfVewgb95TNCuGFE9Wt8YHauAo7xeuw8S4ugL3pKtQheuYzul"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -13353,7 +13355,13 @@
     "legacy-fp:921eaed57a6065f73e1ffeef0c667d57",
     "legacy-fp:e0e059940c71b2810b56e3553d404001",
     "legacy-fp:93ada2780748ca38998cf06574305e8e",
-    "legacy-fp:1a69969354b883021e69c5f12cfc3fa3"
+    "legacy-fp:1a69969354b883021e69c5f12cfc3fa3",
+    "uid:00a497e0baa7c6423b8d2c29",
+    "url:00a497e0baa7c6423b8d2c2982f50272",
+    "author-text:tuyen sinh dai hoc duy tan:881ead732f81c381c10c85b306e9a53e",
+    "author-loose:tuyen sinh dai hoc duy tan:9d582ac16239654d602cb0a99814282e",
+    "author-firstline:tuyen sinh dai hoc duy tan:ca8b1f4080bf435928c8f110ab611e9c",
+    "author-image:tuyen sinh dai hoc duy tan:178aff5325f71b20b7912d905d9125f4"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -14133,7 +14141,8 @@
     "921eaed57a6065f73e1ffeef0c667d57",
     "e0e059940c71b2810b56e3553d404001",
     "93ada2780748ca38998cf06574305e8e",
-    "1a69969354b883021e69c5f12cfc3fa3"
+    "1a69969354b883021e69c5f12cfc3fa3",
+    "881ead732f81c381c10c85b306e9a53e"
   ],
   "records": [
     {
@@ -79846,7 +79855,22 @@
         "author-image:dtu - truong ngon ngu - xa hoi nhan van:20b5f892b13fd1b8002e5dd35cf17219"
       ],
       "seenAt": "2026-09-27T12:40:51.681Z"
+    },
+    {
+      "uid": "00a497e0baa7c6423b8d2c29",
+      "author": "Tuyển sinh Đại học Duy Tân",
+      "url": "https://www.facebook.com/tuyensinhDTU/posts/pfbid0P8qvX6dLtWuRXSD6CfVewgb95TNCuGFE9Wt8YHauAo7xeuw8S4ugL3pKtQheuYzul",
+      "textHash": "881ead732f81c381c10c85b3",
+      "keys": [
+        "uid:00a497e0baa7c6423b8d2c29",
+        "url:00a497e0baa7c6423b8d2c2982f50272",
+        "author-text:tuyen sinh dai hoc duy tan:881ead732f81c381c10c85b306e9a53e",
+        "author-loose:tuyen sinh dai hoc duy tan:9d582ac16239654d602cb0a99814282e",
+        "author-firstline:tuyen sinh dai hoc duy tan:ca8b1f4080bf435928c8f110ab611e9c",
+        "author-image:tuyen sinh dai hoc duy tan:178aff5325f71b20b7912d905d9125f4"
+      ],
+      "seenAt": "2026-09-28T00:41:14.230Z"
     }
   ],
-  "updatedAt": "2026-09-27T14:39:40.887Z"
+  "updatedAt": "2026-09-28T00:41:14.237Z"
 }
