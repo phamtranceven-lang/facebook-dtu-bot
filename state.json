@@ -8504,6 +8504,10 @@
     "author-loose:truong du lich - dai hoc duy tan:5897aa57869ba40ea1f75613742a2fcc",
     "author-firstline:truong du lich - dai hoc duy tan:ebbd614eb881f5b2495b5f7d2fda4f17",
     "author-image:truong du lich - dai hoc duy tan:6f0125d8dff17e6d7f84e001a013b53d",
+    "author-text:duy tan university:de1e25b47e5287821e64ad440b2475f4",
+    "author-loose:duy tan university:14e2e9e128a8fa890660d98dd476ed16",
+    "author-firstline:duy tan university:14e2e9e128a8fa890660d98dd476ed16",
+    "author-image:duy tan university:4e5ed4c877c85eeb5aa468e716bcc1f8",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -10665,6 +10669,7 @@
     "uid:7ab2b57fa5d08c706612c104",
     "uid:e63883cdeeee30f824e1a528",
     "uid:18ef7908204f810c1792d781",
+    "uid:196edb34e3ce3ceecc276ce7",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -12702,6 +12707,7 @@
     "url:7ab2b57fa5d08c706612c104e0252492",
     "url:e63883cdeeee30f824e1a5284fd26ac5",
     "url:18ef7908204f810c1792d781e5565738",
+    "url:196edb34e3ce3ceecc276ce7d60b13fe",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -13488,12 +13494,7 @@
     "legacy-fp:921eaed57a6065f73e1ffeef0c667d57",
     "legacy-fp:e0e059940c71b2810b56e3553d404001",
     "legacy-fp:95fc7f9ba8f1aefcf29c85d2603ddaef",
-    "uid:196edb34e3ce3ceecc276ce7",
-    "url:196edb34e3ce3ceecc276ce7d60b13fe",
-    "author-text:duy tan university:de1e25b47e5287821e64ad440b2475f4",
-    "author-loose:duy tan university:14e2e9e128a8fa890660d98dd476ed16",
-    "author-firstline:duy tan university:14e2e9e128a8fa890660d98dd476ed16",
-    "author-image:duy tan university:4e5ed4c877c85eeb5aa468e716bcc1f8"
+    "legacy-fp:de1e25b47e5287821e64ad440b2475f4"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -80839,5 +80840,5 @@
       "seenAt": "2026-09-29T08:40:52.878Z"
     }
   ],
-  "updatedAt": "2026-09-29T08:40:52.885Z"
+  "updatedAt": "2026-09-29T10:39:57.025Z"
 }
