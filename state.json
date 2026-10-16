@@ -9607,6 +9607,10 @@
     "author-loose:tuyen sinh dai hoc duy tan:43f0b08866c7f313ea5602d94610b9ec",
     "author-firstline:tuyen sinh dai hoc duy tan:9bb6eeb7119e5cb8c1a4965324dc46f9",
     "author-image:tuyen sinh dai hoc duy tan:208317f3cc28362b83ddc4561d4c2725",
+    "author-text:tuyen sinh dai hoc duy tan:9fb582f28284c42a18c9c1e5246dc404",
+    "author-loose:tuyen sinh dai hoc duy tan:e17f7c8c4a701cbe7b7bdab40de2f344",
+    "author-firstline:tuyen sinh dai hoc duy tan:da7d7ebabde79b249b758c01ecb7b7f1",
+    "author-image:tuyen sinh dai hoc duy tan:03d06e4bd2e804e7bb77320f49eefb44",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -12061,6 +12065,7 @@
     "uid:0c3e8b633c389961064f8719",
     "uid:980df796aba4b53dfc4b6122",
     "uid:e1585aa6fd56327c05b69830",
+    "uid:7f9d4085d529fe36d936222a",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -14391,6 +14396,7 @@
     "url:0c3e8b633c389961064f87199bc4d28f",
     "url:980df796aba4b53dfc4b6122746d2699",
     "url:e1585aa6fd56327c05b6983099bb0f7f",
+    "url:7f9d4085d529fe36d936222aea992edf",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -15265,12 +15271,7 @@
     "legacy-fp:5fe5da32333d8a2ac52b6b212bebe2cc",
     "legacy-fp:8656ca163b7dae5805717854708164f7",
     "legacy-fp:964868d4665d2b40d825cef6012006a0",
-    "uid:7f9d4085d529fe36d936222a",
-    "url:7f9d4085d529fe36d936222aea992edf",
-    "author-text:tuyen sinh dai hoc duy tan:9fb582f28284c42a18c9c1e5246dc404",
-    "author-loose:tuyen sinh dai hoc duy tan:e17f7c8c4a701cbe7b7bdab40de2f344",
-    "author-firstline:tuyen sinh dai hoc duy tan:da7d7ebabde79b249b758c01ecb7b7f1",
-    "author-image:tuyen sinh dai hoc duy tan:03d06e4bd2e804e7bb77320f49eefb44"
+    "legacy-fp:9fb582f28284c42a18c9c1e5246dc404"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -90658,5 +90659,5 @@
       "seenAt": "2026-10-16T00:41:28.650Z"
     }
   ],
-  "updatedAt": "2026-10-16T00:41:28.655Z"
+  "updatedAt": "2026-10-16T02:40:28.531Z"
 }
