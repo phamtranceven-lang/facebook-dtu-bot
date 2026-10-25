@@ -10322,6 +10322,13 @@
     "author-text:dtu - truong ngon ngu - xa hoi nhan van:2e97ed2c1c8d78111b22fc3a01c8c49d",
     "author-loose:dtu - truong ngon ngu - xa hoi nhan van:cc35996afc21954158a2b02e2252ee36",
     "author-image:dtu - truong ngon ngu - xa hoi nhan van:6fb3c97fef82e5f02200b77038de456f",
+    "author-text:dtu - truong ngon ngu - xa hoi nhan van:908e9c7e2704fc5e1ea84330c3912200",
+    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:06d94673607d5dfc1a6494ab201906a7",
+    "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:3b5f0663226fd938e372a004bb38bfcf",
+    "author-image:dtu - truong ngon ngu - xa hoi nhan van:fb31d9f1720393c324d1f34176ea9f26",
+    "author-text:dtu - truong ngon ngu - xa hoi nhan van:a5c64ca75cc2982e23dabb20d2360b55",
+    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:c00952273dcb7e9d578c6e9425f2bedd",
+    "author-image:dtu - truong ngon ngu - xa hoi nhan van:c1ed9ddad605a294988b72d1ca1721f4",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -12976,6 +12983,8 @@
     "uid:d83155ded2915ff994100bdd",
     "uid:710e09a918d1d680bd9adb56",
     "uid:29795a1ef7e2af838218409b",
+    "uid:ad4fa582d4ea75c3696d529d",
+    "uid:6cee21a7a258c0ccebab9f2c",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -15506,6 +15515,8 @@
     "url:d83155ded2915ff994100bdd571733bc",
     "url:710e09a918d1d680bd9adb561bf44b27",
     "url:29795a1ef7e2af838218409becdd13ab",
+    "url:ad4fa582d4ea75c3696d529d414f49a9",
+    "url:6cee21a7a258c0ccebab9f2c9dfcb2ef",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -16432,17 +16443,8 @@
     "legacy-fp:b6f9cf39f4a9b3b6f71c768cb99c5d99",
     "legacy-fp:71b4e6cc748e9da0d4ddd91394d758d2",
     "legacy-fp:2e97ed2c1c8d78111b22fc3a01c8c49d",
-    "uid:ad4fa582d4ea75c3696d529d",
-    "url:ad4fa582d4ea75c3696d529d414f49a9",
-    "author-text:dtu - truong ngon ngu - xa hoi nhan van:908e9c7e2704fc5e1ea84330c3912200",
-    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:06d94673607d5dfc1a6494ab201906a7",
-    "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:3b5f0663226fd938e372a004bb38bfcf",
-    "author-image:dtu - truong ngon ngu - xa hoi nhan van:fb31d9f1720393c324d1f34176ea9f26",
-    "uid:6cee21a7a258c0ccebab9f2c",
-    "url:6cee21a7a258c0ccebab9f2c9dfcb2ef",
-    "author-text:dtu - truong ngon ngu - xa hoi nhan van:a5c64ca75cc2982e23dabb20d2360b55",
-    "author-loose:dtu - truong ngon ngu - xa hoi nhan van:c00952273dcb7e9d578c6e9425f2bedd",
-    "author-image:dtu - truong ngon ngu - xa hoi nhan van:c1ed9ddad605a294988b72d1ca1721f4"
+    "legacy-fp:908e9c7e2704fc5e1ea84330c3912200",
+    "legacy-fp:a5c64ca75cc2982e23dabb20d2360b55"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -91878,5 +91880,5 @@
       "seenAt": "2026-10-25T04:41:50.060Z"
     }
   ],
-  "updatedAt": "2026-10-25T04:41:50.066Z"
+  "updatedAt": "2026-10-25T06:40:29.997Z"
 }
