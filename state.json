@@ -2924,7 +2924,8 @@
     "2f97f2779b4852f499222e49",
     "2ab7be642c5c300dd9f970bc",
     "9ce825d05469f333dc39fd6e",
-    "6ec5026954113a30aa922eea"
+    "6ec5026954113a30aa922eea",
+    "320f51ff8715867bb2607989"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -5725,7 +5726,8 @@
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0HG8eXwg9Pig4gisCqndFfUuztxJAvBmpmDegJCmnjxjaL1fnoJJztss1T13Msp67l",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid02YKhmZ6YKq1V1zXACuEBhnNsnNVrLgnSzJSKTxgGVJCacDbCRfnyw9HncjSC32u6Cl",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid02WM9BZGBe8Sg9Rdsxf7u827WCxdoYPhm8dvuqo9rRuBMzHJq6GH5GjQgsE32sVoael",
-    "https://www.facebook.com/dtkt.dtu/posts/pfbid02WA7RtnxQNCC5hkhGTbQTYKVHXTFZvXTsicLnyWARNqV9EcQpwFZi4XqsfPfPR6sXl"
+    "https://www.facebook.com/dtkt.dtu/posts/pfbid02WA7RtnxQNCC5hkhGTbQTYKVHXTFZvXTsicLnyWARNqV9EcQpwFZi4XqsfPfPR6sXl",
+    "https://www.facebook.com/DuyTanHTi/posts/pfbid0dNAnB4cwSGD7hE3o4dYV8yiqEroT8jcHxetYYiNSryJNV7PuTY59a1ZtSdGUu1FQl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -11359,6 +11361,10 @@
     "author-loose:truong du lich - dai hoc duy tan:eaf624f4603ea517a1753300e0b255f7",
     "author-firstline:truong du lich - dai hoc duy tan:f2babcab0e07011cd489dee8bb4274c8",
     "author-image:truong du lich - dai hoc duy tan:ac88f15bc4fb590ea422939af054e52a",
+    "author-text:tuoi tre truong kinh te - dai hoc duy tan:5ac9d1ce0df01213b926887f6267ca4f",
+    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:390742ab1cfff00be4673c299f549700",
+    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:f02b9284eb446509dbf4f3d3bb7bb906",
+    "author-image:tuoi tre truong kinh te - dai hoc duy tan:43334d90260177711ce46d354c7168bc",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -14281,6 +14287,7 @@
     "uid:2f97f2779b4852f499222e49",
     "uid:2ab7be642c5c300dd9f970bc",
     "uid:9ce825d05469f333dc39fd6e",
+    "uid:6ec5026954113a30aa922eea",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -17079,6 +17086,7 @@
     "url:2f97f2779b4852f499222e498ef51d7f",
     "url:2ab7be642c5c300dd9f970bc44ce1d96",
     "url:9ce825d05469f333dc39fd6e34cadf4f",
+    "url:6ec5026954113a30aa922eea370951aa",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -18093,12 +18101,13 @@
     "legacy-fp:77e7f9478b38433e95d3ce9c14618a76",
     "legacy-fp:a9c8595369bcf3de729519cee29f80cb",
     "legacy-fp:3a951180fff31ca3e2d15c03bbebbeeb",
-    "uid:6ec5026954113a30aa922eea",
-    "url:6ec5026954113a30aa922eea370951aa",
-    "author-text:tuoi tre truong kinh te - dai hoc duy tan:5ac9d1ce0df01213b926887f6267ca4f",
-    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:390742ab1cfff00be4673c299f549700",
-    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:f02b9284eb446509dbf4f3d3bb7bb906",
-    "author-image:tuoi tre truong kinh te - dai hoc duy tan:43334d90260177711ce46d354c7168bc"
+    "legacy-fp:5ac9d1ce0df01213b926887f6267ca4f",
+    "uid:320f51ff8715867bb2607989",
+    "url:320f51ff8715867bb26079894f494392",
+    "author-text:truong du lich - dai hoc duy tan:c726e0138dce1663a55942dae658ca47",
+    "author-loose:truong du lich - dai hoc duy tan:4bf01325933297d5fa1401069853d93a",
+    "author-firstline:truong du lich - dai hoc duy tan:f25f3423fdbfd4c5c712de54d7edb801",
+    "author-image:truong du lich - dai hoc duy tan:78271d55d2f049ebf4b608bb219a2eab"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -19115,24 +19124,10 @@
     "77e7f9478b38433e95d3ce9c14618a76",
     "a9c8595369bcf3de729519cee29f80cb",
     "3a951180fff31ca3e2d15c03bbebbeeb",
-    "5ac9d1ce0df01213b926887f6267ca4f"
+    "5ac9d1ce0df01213b926887f6267ca4f",
+    "c726e0138dce1663a55942dae658ca47"
   ],
   "records": [
-    {
-      "uid": "ba4bf0f0b25f0235e66b305f",
-      "author": "DTU - Trường Ngôn ngữ - Xã hội Nhân văn",
-      "url": "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0yg3Ro7mG1wg5YEfXs1iqCBBeMQ4Pqs6MkpzQjfLAktj4HCP83n4mM56W4eZCNXKKl",
-      "textHash": "008d447e48b12da0eefa28c0",
-      "keys": [
-        "uid:ba4bf0f0b25f0235e66b305f",
-        "url:ba4bf0f0b25f0235e66b305fcdf43851",
-        "author-text:dtu - truong ngon ngu - xa hoi nhan van:008d447e48b12da0eefa28c0ca209ee3",
-        "author-loose:dtu - truong ngon ngu - xa hoi nhan van:cd1398298785c28bb0df1c6966e6c5c9",
-        "author-firstline:dtu - truong ngon ngu - xa hoi nhan van:a8a6b940930a03783c7b31f399f691c7",
-        "author-image:dtu - truong ngon ngu - xa hoi nhan van:087a4c8f3628a732e4feec0ee1f1d8c9"
-      ],
-      "seenAt": "2026-07-13T14:48:22.543Z"
-    },
     {
       "uid": "ce5cf458146579f717b95aad",
       "author": "DTU - Trường Ngôn ngữ - Xã hội Nhân văn",
@@ -93624,7 +93619,22 @@
         "author-image:tuoi tre truong kinh te - dai hoc duy tan:43334d90260177711ce46d354c7168bc"
       ],
       "seenAt": "2026-11-09T08:41:04.239Z"
+    },
+    {
+      "uid": "320f51ff8715867bb2607989",
+      "author": "Trường Du lịch - Đại học Duy Tân",
+      "url": "https://www.facebook.com/DuyTanHTi/posts/pfbid0dNAnB4cwSGD7hE3o4dYV8yiqEroT8jcHxetYYiNSryJNV7PuTY59a1ZtSdGUu1FQl",
+      "textHash": "c726e0138dce1663a55942da",
+      "keys": [
+        "uid:320f51ff8715867bb2607989",
+        "url:320f51ff8715867bb26079894f494392",
+        "author-text:truong du lich - dai hoc duy tan:c726e0138dce1663a55942dae658ca47",
+        "author-loose:truong du lich - dai hoc duy tan:4bf01325933297d5fa1401069853d93a",
+        "author-firstline:truong du lich - dai hoc duy tan:f25f3423fdbfd4c5c712de54d7edb801",
+        "author-image:truong du lich - dai hoc duy tan:78271d55d2f049ebf4b608bb219a2eab"
+      ],
+      "seenAt": "2026-11-09T10:41:23.420Z"
     }
   ],
-  "updatedAt": "2026-11-09T08:41:04.246Z"
+  "updatedAt": "2026-11-09T10:41:23.428Z"
 }
