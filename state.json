@@ -3033,7 +3033,8 @@
     "870e72cc2960de9cb41dc168",
     "7bca02ad5222ff3064de0596",
     "c4154d0e26a36507b8fe0a30",
-    "167426711300e8638f6303a9"
+    "167426711300e8638f6303a9",
+    "4224f502a4ae8d1c7959bd69"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -5943,7 +5944,8 @@
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02C6u96XZQnMMH6T8pXd2AyeVCMR5z25xsYjBYb19DZQKfXpMzneLdQsEfh5tME3QVl",
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0sey7kzRPYeumyppfaBnD1kraN8iMEJfiMwxJwUDsuVpDSBfxsRswbAvhCf1kBEopl",
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02cZYDjBZpJdS3fDAoJoZqWBUuxtaWRWsfYf7Fk8htdNZzF6GfD2zBsq5U6QQ65vZol",
-    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0HDdADAS8kqD4AkuA4KwCeEtimZNZWruKnDwA6W8uwTYFyLJCaqFxQg4z1qYfMtZ6l"
+    "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0HDdADAS8kqD4AkuA4KwCeEtimZNZWruKnDwA6W8uwTYFyLJCaqFxQg4z1qYfMtZ6l",
+    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02uwf6Q1XQ5y79bpjXX6kNsfucXitHaWcjUYYpDU4ZB7tpRsRAoECQxr3HQvAUCdARl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -18780,7 +18782,13 @@
     "legacy-fp:a49c9068e8d90db650da2001d2eb1a18",
     "legacy-fp:ee1f94bfd87d4d1539aa80c848137280",
     "legacy-fp:b88b20ff13abaaf38a49440dbd8c80ee",
-    "legacy-fp:ab3020578ec3548d0b21bcd483f9b08e"
+    "legacy-fp:ab3020578ec3548d0b21bcd483f9b08e",
+    "uid:4224f502a4ae8d1c7959bd69",
+    "url:4224f502a4ae8d1c7959bd6908a343fe",
+    "author-text:duy tan university:7415763e25b76f4077163e410a18eb29",
+    "author-loose:duy tan university:d87bf99519874238dacb3d9629a7f1d7",
+    "author-firstline:duy tan university:df09ca56eaa2722435d79a9fa337e8bd",
+    "author-image:duy tan university:c97cfef8d071ec4fdc0126e47b20161c"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -19827,24 +19835,10 @@
     "a49c9068e8d90db650da2001d2eb1a18",
     "ee1f94bfd87d4d1539aa80c848137280",
     "b88b20ff13abaaf38a49440dbd8c80ee",
-    "ab3020578ec3548d0b21bcd483f9b08e"
+    "ab3020578ec3548d0b21bcd483f9b08e",
+    "7415763e25b76f4077163e410a18eb29"
   ],
   "records": [
-    {
-      "uid": "cd92067e79a49af43ef83dd6",
-      "author": "Tuổi trẻ Trường Kinh tế - Đại học Duy Tân",
-      "url": "https://www.facebook.com/dtkt.dtu/posts/pfbid02W5u3X3xxzSNjRLCErW4nTmizTzPmA58mr8H6QNrkH8b55tWLkBbMDHpANeFRtScGl",
-      "textHash": "06d5013372e806c4e0156230",
-      "keys": [
-        "uid:cd92067e79a49af43ef83dd6",
-        "url:cd92067e79a49af43ef83dd6eb35ac67",
-        "author-text:tuoi tre truong kinh te - dai hoc duy tan:06d5013372e806c4e015623042f01423",
-        "author-loose:tuoi tre truong kinh te - dai hoc duy tan:53fb31f052882282befffd3198cfbbb7",
-        "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:879c57d3cb3825e67d6de61771a5e8a7",
-        "author-image:tuoi tre truong kinh te - dai hoc duy tan:67739021f1aaf9d68b9400d9447062c7"
-      ],
-      "seenAt": "2026-07-19T06:40:55.064Z"
-    },
     {
       "uid": "a6b0c77e7b206c3ea6becdfb",
       "author": "Trường Du lịch - Đại học Duy Tân",
@@ -94342,7 +94336,22 @@
         "author-image:dtu - truong ngon ngu - xa hoi nhan van:f6634c7c272c48e18ae15f66ea339b35"
       ],
       "seenAt": "2026-11-15T12:41:28.755Z"
+    },
+    {
+      "uid": "4224f502a4ae8d1c7959bd69",
+      "author": "Duy Tan University",
+      "url": "https://www.facebook.com/Duy.Tan.University/posts/pfbid02uwf6Q1XQ5y79bpjXX6kNsfucXitHaWcjUYYpDU4ZB7tpRsRAoECQxr3HQvAUCdARl",
+      "textHash": "7415763e25b76f4077163e41",
+      "keys": [
+        "uid:4224f502a4ae8d1c7959bd69",
+        "url:4224f502a4ae8d1c7959bd6908a343fe",
+        "author-text:duy tan university:7415763e25b76f4077163e410a18eb29",
+        "author-loose:duy tan university:d87bf99519874238dacb3d9629a7f1d7",
+        "author-firstline:duy tan university:df09ca56eaa2722435d79a9fa337e8bd",
+        "author-image:duy tan university:c97cfef8d071ec4fdc0126e47b20161c"
+      ],
+      "seenAt": "2026-11-16T02:41:47.767Z"
     }
   ],
-  "updatedAt": "2026-11-16T00:40:40.313Z"
+  "updatedAt": "2026-11-16T02:41:47.779Z"
 }
