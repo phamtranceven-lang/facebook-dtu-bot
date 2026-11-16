@@ -3037,7 +3037,8 @@
     "4224f502a4ae8d1c7959bd69",
     "f3026617679d9a5b3c148f1a",
     "9511802a1607fc0b075767c5",
-    "c5367dbc786256a8f06d6474"
+    "c5367dbc786256a8f06d6474",
+    "aa395bd669b94d8a708e929c"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -5951,7 +5952,8 @@
     "https://www.facebook.com/Duy.Tan.University/posts/pfbid02uwf6Q1XQ5y79bpjXX6kNsfucXitHaWcjUYYpDU4ZB7tpRsRAoECQxr3HQvAUCdARl",
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid0Yx5LQvXLxxg1MTAJWD5eHGy6ohWvKBs5uPQnGFTJitPUT7vveBT6c67yzKfDQ4Nel",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid0xgn63kiHzL2HwVSPqBi7FpJb1eFLU8kAwAEFnTRWdoMU4sx88P4g2xiL3u2415ewl",
-    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02FZji5EWx4GFCS1DB3o2t4i6SA6C9ymjGLjwMryuY1p4RW4bYDqe5y6cdUhfDX3hZl"
+    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02FZji5EWx4GFCS1DB3o2t4i6SA6C9ymjGLjwMryuY1p4RW4bYDqe5y6cdUhfDX3hZl",
+    "https://www.facebook.com/Duy.Tan.University/posts/pfbid04JLLDtqX44fNU57uRzRm3WVZGdjnJKerz7w3x4CP7rxvRxp7rgfsqvorYwmWNfFCl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -18816,7 +18818,13 @@
     "legacy-fp:7415763e25b76f4077163e410a18eb29",
     "legacy-fp:95f2725f0db07457ddb7655bcaf34200",
     "legacy-fp:b70226ac8a0e98d30aafc0e468869b14",
-    "legacy-fp:b1ff3d9d6e3b0415ce3ae55a93009b49"
+    "legacy-fp:b1ff3d9d6e3b0415ce3ae55a93009b49",
+    "uid:aa395bd669b94d8a708e929c",
+    "url:aa395bd669b94d8a708e929c44b9ead4",
+    "author-text:duy tan university:2a3441f8a71e4ba8bc3a54fe2ada34ba",
+    "author-loose:duy tan university:e6a587c4670d75ba9210d9eb5a1717c0",
+    "author-firstline:duy tan university:a0ec335b6f5f4880f03e74403b2ecb8f",
+    "author-image:duy tan university:9974a97f5ff6ee947dbd3ec96a508d00"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -19867,24 +19875,10 @@
     "7415763e25b76f4077163e410a18eb29",
     "95f2725f0db07457ddb7655bcaf34200",
     "b70226ac8a0e98d30aafc0e468869b14",
-    "b1ff3d9d6e3b0415ce3ae55a93009b49"
+    "b1ff3d9d6e3b0415ce3ae55a93009b49",
+    "2a3441f8a71e4ba8bc3a54fe2ada34ba"
   ],
   "records": [
-    {
-      "uid": "27987ec9b41587f5c8530bcc",
-      "author": "Đại học Duy Tân",
-      "url": "https://www.facebook.com/daihocduytan.dtu/posts/pfbid02zUEuJGbUAHwtz6utnXCUBbEMSu3KtZbPafGq2kVv2aWGgUCcmp3G4imM4JbBa1EGl",
-      "textHash": "036bfe3f4fc8be11a871ed18",
-      "keys": [
-        "uid:27987ec9b41587f5c8530bcc",
-        "url:27987ec9b41587f5c8530bcc8da97afc",
-        "author-text:dai hoc duy tan:036bfe3f4fc8be11a871ed18d26575a7",
-        "author-loose:dai hoc duy tan:ff489833a00728de19a55454f476df8c",
-        "author-firstline:dai hoc duy tan:ff489833a00728de19a55454f476df8c",
-        "author-image:dai hoc duy tan:a4845b7ca07430ea91f5e7f0cd76b8cd"
-      ],
-      "seenAt": "2026-07-19T08:41:45.726Z"
-    },
     {
       "uid": "685a12f5729067eca28fb9d3",
       "author": "Duy Tan University",
@@ -94382,7 +94376,22 @@
         "author-image:duy tan university:6eb8499ff49cbe4608abfeda20db9beb"
       ],
       "seenAt": "2026-11-16T04:41:46.462Z"
+    },
+    {
+      "uid": "aa395bd669b94d8a708e929c",
+      "author": "Duy Tan University",
+      "url": "https://www.facebook.com/Duy.Tan.University/posts/pfbid04JLLDtqX44fNU57uRzRm3WVZGdjnJKerz7w3x4CP7rxvRxp7rgfsqvorYwmWNfFCl",
+      "textHash": "2a3441f8a71e4ba8bc3a54fe",
+      "keys": [
+        "uid:aa395bd669b94d8a708e929c",
+        "url:aa395bd669b94d8a708e929c44b9ead4",
+        "author-text:duy tan university:2a3441f8a71e4ba8bc3a54fe2ada34ba",
+        "author-loose:duy tan university:e6a587c4670d75ba9210d9eb5a1717c0",
+        "author-firstline:duy tan university:a0ec335b6f5f4880f03e74403b2ecb8f",
+        "author-image:duy tan university:9974a97f5ff6ee947dbd3ec96a508d00"
+      ],
+      "seenAt": "2026-11-16T10:41:51.191Z"
     }
   ],
-  "updatedAt": "2026-11-16T08:40:39.635Z"
+  "updatedAt": "2026-11-16T10:41:51.208Z"
 }
