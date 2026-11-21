@@ -3090,7 +3090,8 @@
     "d82749bc6500331e4235e137",
     "486f5e14ba998c1c303701c7",
     "7ba43e37fd80f8578be8722f",
-    "91cd7f1940349ece728789e9"
+    "91cd7f1940349ece728789e9",
+    "5d4c16ee10d06e093ec1b15d"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -6057,7 +6058,8 @@
     "https://www.facebook.com/dtkt.dtu/posts/pfbid038FnWcE59mrrgZuNWE3ux6XLY5w1bz5KDAqLngGVMJxHuXCTj1Nmtf3HkuxXqfhwtl",
     "https://www.facebook.com/DuyTanHTi/posts/pfbid028FEuASCSZcRAkNUxDGCrTuDHZAPNu51ghKWWq5FbEF5TGMLCLhf3VaMMJFHW9RMpl",
     "https://www.facebook.com/ngoaingudaihocduytan/posts/pfbid02q2qges1mw5KzsREkNx4oS14x41WRxGR7k9thZAdijneMVY25Z84vqRF6HhphkhXal",
-    "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid0yW4wRFD5DVjrAh2PhiXDXmS7tcNgsFyW1uqBeDg8K2pf5Fcb7rdQ9tNXups7sFzql"
+    "https://www.facebook.com/KhoaKhoaHocXaHoiVaNhanVanDaiHocDuyTan/posts/pfbid0yW4wRFD5DVjrAh2PhiXDXmS7tcNgsFyW1uqBeDg8K2pf5Fcb7rdQ9tNXups7sFzql",
+    "https://www.facebook.com/Duy.Tan.University/posts/pfbid02dGAiBYfSjnpyptBJST8xmpuLD1sRHQczEKAt3qcmdFi7WnGzGgMFxb1n2A2jJUfpl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -19168,7 +19170,13 @@
     "legacy-fp:5bdd470d21ffbf152c349c57eb1d1e22",
     "legacy-fp:747bda533dccc8d283e26732868e4305",
     "legacy-fp:047622b328997c06c5c5b41f91ec513b",
-    "legacy-fp:668c32beeff2880b59cfa23a88fb5008"
+    "legacy-fp:668c32beeff2880b59cfa23a88fb5008",
+    "uid:5d4c16ee10d06e093ec1b15d",
+    "url:5d4c16ee10d06e093ec1b15dec411a07",
+    "author-text:duy tan university:ee4d970052c552bcdd34536ef4fc94b3",
+    "author-loose:duy tan university:ab8a08a373e4fe4eb181db225d42337c",
+    "author-firstline:duy tan university:c077d0d52ffef863f75d69c853e7eeb3",
+    "author-image:duy tan university:74fc55c8e757860a13a03f2b6b47e659"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -20242,24 +20250,10 @@
     "5bdd470d21ffbf152c349c57eb1d1e22",
     "747bda533dccc8d283e26732868e4305",
     "047622b328997c06c5c5b41f91ec513b",
-    "668c32beeff2880b59cfa23a88fb5008"
+    "668c32beeff2880b59cfa23a88fb5008",
+    "ee4d970052c552bcdd34536ef4fc94b3"
   ],
   "records": [
-    {
-      "uid": "6bb00c1b361bdd47f0936478",
-      "author": "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
-      "url": "https://www.facebook.com/truongkhoahocmaytinh/posts/pfbid02TgDhDYaX8HnTKmaP4iBN5wD2hPdHhtzxdcpcJJvvCxMwT8EjNdFQ7yw9fbpkpz5Hl",
-      "textHash": "1fdb3e59fd695bf46a04d3d9",
-      "keys": [
-        "uid:6bb00c1b361bdd47f0936478",
-        "url:6bb00c1b361bdd47f0936478d0d2df0a",
-        "author-text:dtu - truong khoa hoc may tinh va tri tue nhan tao:1fdb3e59fd695bf46a04d3d9b1ac13d7",
-        "author-loose:dtu - truong khoa hoc may tinh va tri tue nhan tao:9c8e36bbdd346c85dca18c35a1ab30f2",
-        "author-firstline:dtu - truong khoa hoc may tinh va tri tue nhan tao:552d7304370f992a9ea1978ed8540b3e",
-        "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:fb101a22635e42df16d1d942ad3d2cda"
-      ],
-      "seenAt": "2026-07-21T06:41:05.960Z"
-    },
     {
       "uid": "a6ffbdcf4f2f5f07d479c648",
       "author": "Tuổi trẻ Trường Công nghệ - Đại học Duy Tân",
@@ -94769,7 +94763,22 @@
         "author-image:dtu - khoa khoa hoc xa hoi va nhan van:7e711bfb433461e6569d7394eefc4366"
       ],
       "seenAt": "2026-11-21T00:41:18.345Z"
+    },
+    {
+      "uid": "5d4c16ee10d06e093ec1b15d",
+      "author": "Duy Tan University",
+      "url": "https://www.facebook.com/Duy.Tan.University/posts/pfbid02dGAiBYfSjnpyptBJST8xmpuLD1sRHQczEKAt3qcmdFi7WnGzGgMFxb1n2A2jJUfpl",
+      "textHash": "ee4d970052c552bcdd34536e",
+      "keys": [
+        "uid:5d4c16ee10d06e093ec1b15d",
+        "url:5d4c16ee10d06e093ec1b15dec411a07",
+        "author-text:duy tan university:ee4d970052c552bcdd34536ef4fc94b3",
+        "author-loose:duy tan university:ab8a08a373e4fe4eb181db225d42337c",
+        "author-firstline:duy tan university:c077d0d52ffef863f75d69c853e7eeb3",
+        "author-image:duy tan university:74fc55c8e757860a13a03f2b6b47e659"
+      ],
+      "seenAt": "2026-11-21T04:40:49.230Z"
     }
   ],
-  "updatedAt": "2026-11-21T02:40:13.874Z"
+  "updatedAt": "2026-11-21T04:40:49.241Z"
 }
