@@ -12145,6 +12145,10 @@
     "author-loose:duy tan university:2368039aaf70e8d44e344b171772222f",
     "author-firstline:duy tan university:a5529c70c17506603829487c96c45d28",
     "author-image:duy tan university:0a1fd538f3870bbfb43971d9cb052098",
+    "author-text:dai hoc duy tan:358b48e250805a520810987d4ba571a9",
+    "author-loose:dai hoc duy tan:3f590e8c779814b9d379fab81846bd00",
+    "author-firstline:dai hoc duy tan:7ef2c19f89d3e579ab88f6b7c8e6386a",
+    "author-image:dai hoc duy tan:b6ef06e32bb89f20a811df691fb3e1ed",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -15257,6 +15261,7 @@
     "uid:c32c6366ffdc75fb5a561d0b",
     "uid:12fa5f4b0bcd96d91830eaf4",
     "uid:96600ad5ae4cd7a78ec6a7bd",
+    "uid:feb297af5d109f4f84c8fb37",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -18245,6 +18250,7 @@
     "url:c32c6366ffdc75fb5a561d0bc98a7869",
     "url:12fa5f4b0bcd96d91830eaf454d658e3",
     "url:96600ad5ae4cd7a78ec6a7bd5cc25f22",
+    "url:feb297af5d109f4f84c8fb37e362cd3b",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -19328,12 +19334,7 @@
     "legacy-fp:7378cd1f5e1d4774e975b1c4c3a9bcc7",
     "legacy-fp:1cd35390522441a0242d9e9a1e105217",
     "legacy-fp:e903143e952f29120051e8a16746230a",
-    "uid:feb297af5d109f4f84c8fb37",
-    "url:feb297af5d109f4f84c8fb37e362cd3b",
-    "author-text:dai hoc duy tan:358b48e250805a520810987d4ba571a9",
-    "author-loose:dai hoc duy tan:3f590e8c779814b9d379fab81846bd00",
-    "author-firstline:dai hoc duy tan:7ef2c19f89d3e579ab88f6b7c8e6386a",
-    "author-image:dai hoc duy tan:b6ef06e32bb89f20a811df691fb3e1ed"
+    "legacy-fp:358b48e250805a520810987d4ba571a9"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -94951,5 +94952,5 @@
       "seenAt": "2026-11-23T04:40:35.907Z"
     }
   ],
-  "updatedAt": "2026-11-23T04:40:35.914Z"
+  "updatedAt": "2026-11-23T06:40:16.894Z"
 }
