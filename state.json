@@ -3129,7 +3129,8 @@
     "39914df335330c2b0311d71a",
     "3a5d117f1bffc157738d5462",
     "6f9ba6a7491066b589401f9e",
-    "ff6db87f4b56c2ea3305b5bc"
+    "ff6db87f4b56c2ea3305b5bc",
+    "e99adcf44c0f4f898ac10865"
   ],
   "urls": [
     "https://www.facebook.com/TuoitreTruongCongNgheDhDuyTan/posts/pfbid027gH68VCGmneBLWopUCdVd9cMhXdn2WdHGyeF4GT7g1PfiwTbrNEmTXFkndxCgHXFl",
@@ -6135,7 +6136,8 @@
     "https://www.facebook.com/LCDKCKDTU/posts/pfbid02n548gZsZ1QaThoA7yrpyLjcR71P6eALgQdimSHYU2TZhP8XyAUL9pFz7s1khNcsSl",
     "https://www.facebook.com/LCDKCKDTU/posts/pfbid0LTUFru7Tq8WAB7iMucYuQUD5AZwpXbLZJZDKFZ9mxuLURm7sjaudJS8fvUdyBcFgl",
     "https://www.facebook.com/DTU.InternationalSchool/posts/pfbid02y6v8Xzs6KrraUEpixUe691i5NV4jQUEPXcH5FDwYeGFseL2wHiNwSPL6cGzxoEwgl",
-    "https://www.facebook.com/dtkt.dtu/posts/pfbid0YrwuDJwomWvCx19qLZnGf7mFZpeXPGnMVXmRWgKyyM7Kv1ikgHySWXkw55gyGbDGl"
+    "https://www.facebook.com/dtkt.dtu/posts/pfbid0YrwuDJwomWvCx19qLZnGf7mFZpeXPGnMVXmRWgKyyM7Kv1ikgHySWXkw55gyGbDGl",
+    "https://www.facebook.com/daihocduytan.dtu/posts/pfbid02PP55tvNGTrLPEUpCFdxdoM9RCx99EtAjskJJYV9XceKDCTEUB4dBZDehHVHkswvl"
   ],
   "keys": [
     "author-image:duy tan university:a5e2925fbc57f81cc31b4626cb629f04",
@@ -19457,7 +19459,12 @@
     "legacy-fp:681057bc59e28ea39fea751dcb6bc707",
     "legacy-fp:b8a3752ad399b079f83ea17bf79e339b",
     "legacy-fp:8f7562a0842d4cd9a290d032daa2d74d",
-    "legacy-fp:838e846bec2a05a0941126e40a4611fa"
+    "legacy-fp:838e846bec2a05a0941126e40a4611fa",
+    "uid:e99adcf44c0f4f898ac10865",
+    "url:e99adcf44c0f4f898ac10865eef05a90",
+    "author-text:dai hoc duy tan:c4e6ace4a5cf8ea51d6baf7938d51136",
+    "author-loose:dai hoc duy tan:441a10b64e7dfcd9540aadb715e7e83e",
+    "author-firstline:dai hoc duy tan:a2b56762c686a5540566d92dd2f9cb3a"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -20552,24 +20559,10 @@
     "681057bc59e28ea39fea751dcb6bc707",
     "b8a3752ad399b079f83ea17bf79e339b",
     "8f7562a0842d4cd9a290d032daa2d74d",
-    "838e846bec2a05a0941126e40a4611fa"
+    "838e846bec2a05a0941126e40a4611fa",
+    "c4e6ace4a5cf8ea51d6baf7938d51136"
   ],
   "records": [
-    {
-      "uid": "f5f95682855313fd0a4421e4",
-      "author": "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
-      "url": "https://www.facebook.com/truongkhoahocmaytinh/posts/pfbid0GyMxK568TSyyGmrgh6VBxAcMfeWRjJpKebznQtwDSDULpy1iRjh2gHGS1v8aRbeql",
-      "textHash": "38728d70fbbede59f8a06666",
-      "keys": [
-        "uid:f5f95682855313fd0a4421e4",
-        "url:f5f95682855313fd0a4421e40fa0972d",
-        "author-text:dtu - truong khoa hoc may tinh va tri tue nhan tao:38728d70fbbede59f8a0666699f998b8",
-        "author-loose:dtu - truong khoa hoc may tinh va tri tue nhan tao:4a63bc7afd37538b608e0f0e6d26209e",
-        "author-firstline:dtu - truong khoa hoc may tinh va tri tue nhan tao:4a63bc7afd37538b608e0f0e6d26209e",
-        "author-image:dtu - truong khoa hoc may tinh va tri tue nhan tao:2b4f333ee8784ba55cc42063be56c710"
-      ],
-      "seenAt": "2026-07-22T06:40:48.049Z"
-    },
     {
       "uid": "7643dd00b40be84770ca70c4",
       "author": "DTU - Trường Khoa học Máy tính và Trí tuệ Nhân tạo",
@@ -95083,7 +95076,21 @@
         "author-image:tuoi tre truong kinh te - dai hoc duy tan:7b625807554105f0753dcd51efad06cc"
       ],
       "seenAt": "2026-11-24T12:41:29.305Z"
+    },
+    {
+      "uid": "e99adcf44c0f4f898ac10865",
+      "author": "Đại học Duy Tân",
+      "url": "https://www.facebook.com/daihocduytan.dtu/posts/pfbid02PP55tvNGTrLPEUpCFdxdoM9RCx99EtAjskJJYV9XceKDCTEUB4dBZDehHVHkswvl",
+      "textHash": "c4e6ace4a5cf8ea51d6baf79",
+      "keys": [
+        "uid:e99adcf44c0f4f898ac10865",
+        "url:e99adcf44c0f4f898ac10865eef05a90",
+        "author-text:dai hoc duy tan:c4e6ace4a5cf8ea51d6baf7938d51136",
+        "author-loose:dai hoc duy tan:441a10b64e7dfcd9540aadb715e7e83e",
+        "author-firstline:dai hoc duy tan:a2b56762c686a5540566d92dd2f9cb3a"
+      ],
+      "seenAt": "2026-11-25T00:42:22.470Z"
     }
   ],
-  "updatedAt": "2026-11-24T14:40:41.579Z"
+  "updatedAt": "2026-11-25T00:42:22.476Z"
 }
