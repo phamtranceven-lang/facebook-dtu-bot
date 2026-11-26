@@ -12284,6 +12284,10 @@
     "author-loose:duy tan university:a0526ec9eab64ab72b910b01de6ba784",
     "author-firstline:duy tan university:c077d0d52ffef863f75d69c853e7eeb3",
     "author-image:duy tan university:a466d394c8869f09e6498c8889c9ba79",
+    "author-text:tuoi tre truong kinh te - dai hoc duy tan:7b37e90e4998c8593fa769819f54e050",
+    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:ce4750ab5b8212b5c35752deeaef243b",
+    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:75d71f0059361862ee2a0078f58030e6",
+    "author-image:tuoi tre truong kinh te - dai hoc duy tan:07d0c62e0617b4adc18570ef322884dd",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -15422,6 +15426,7 @@
     "uid:e8c13ec85c0d6a9f3e15dd7e",
     "uid:16bf20953b829016b20c6f29",
     "uid:2d013701f67064d45cdadfcf",
+    "uid:8be0034dd33ee88cf2250fca",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -18436,6 +18441,7 @@
     "url:e8c13ec85c0d6a9f3e15dd7e2f7c35eb",
     "url:16bf20953b829016b20c6f2973110842",
     "url:2d013701f67064d45cdadfcfad942f0a",
+    "url:8be0034dd33ee88cf2250fcaf571a271",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -19535,12 +19541,7 @@
     "legacy-fp:3b8b5ddaa06e4bf1516ac501f30c0413",
     "legacy-fp:e903143e952f29120051e8a16746230a",
     "legacy-fp:79018786ea2c7274c446548484a42006",
-    "uid:8be0034dd33ee88cf2250fca",
-    "url:8be0034dd33ee88cf2250fcaf571a271",
-    "author-text:tuoi tre truong kinh te - dai hoc duy tan:7b37e90e4998c8593fa769819f54e050",
-    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:ce4750ab5b8212b5c35752deeaef243b",
-    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:75d71f0059361862ee2a0078f58030e6",
-    "author-image:tuoi tre truong kinh te - dai hoc duy tan:07d0c62e0617b4adc18570ef322884dd"
+    "legacy-fp:7b37e90e4998c8593fa769819f54e050"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -95173,5 +95174,5 @@
       "seenAt": "2026-11-25T14:41:36.736Z"
     }
   ],
-  "updatedAt": "2026-11-25T14:41:36.753Z"
+  "updatedAt": "2026-11-26T00:40:51.635Z"
 }
