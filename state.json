@@ -12338,6 +12338,13 @@
     "author-loose:tuoi tre truong cong nghe - dai hoc duy tan:f4ce77b6cc8acdb8fc77ca0b8c3c6c48",
     "author-firstline:tuoi tre truong cong nghe - dai hoc duy tan:77e1540ff36c6838d5f91d5e6d870ee1",
     "author-image:tuoi tre truong cong nghe - dai hoc duy tan:d5ff6b609fd249627945853537916a02",
+    "author-text:truong du lich - dai hoc duy tan:108a75d8b4cdc7e9fecafe71ca3f065c",
+    "author-loose:truong du lich - dai hoc duy tan:9e5d4ca6258affa47d3e917bfab137d7",
+    "author-firstline:truong du lich - dai hoc duy tan:4d0761aaf9154d7abf053e62fd909c05",
+    "author-image:truong du lich - dai hoc duy tan:23ad9001f82e80dabcabe473c18a860a",
+    "author-text:tuoi tre truong kinh te - dai hoc duy tan:2055fb35a74d7b06581684ab7c4f6a6b",
+    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:8635c7603ff97835a711dedd52364ed8",
+    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:c8b540a83ad4d61b18423d1f3c58c468",
     "uid:4fd54abd7f47424790ac8fb1",
     "uid:bdbde84fbc8b7313528c1966",
     "uid:c12d847cc7b67d6f5b2ff3fe",
@@ -15487,6 +15494,8 @@
     "uid:6cf337b7052f292f20e27c48",
     "uid:1dd4892c7d9022283e634fb0",
     "uid:53009f2e24f6558ae9757721",
+    "uid:440d75b763a80e0f9253fea6",
+    "uid:38a171e1705b47688663fcb4",
     "url:27552d8cab8e190be60d658f85302a80",
     "url:41e616e56b3f8540320142076a6d2e2d",
     "url:3b6adf27cc503f54bf60ee04d3f8d3da",
@@ -18512,6 +18521,8 @@
     "url:6cf337b7052f292f20e27c4863c9ce25",
     "url:1dd4892c7d9022283e634fb014f0611f",
     "url:53009f2e24f6558ae9757721f33aa895",
+    "url:440d75b763a80e0f9253fea66a7de320",
+    "url:38a171e1705b47688663fcb43bdc9a45",
     "legacy-fp:text:feb4ad672c76949c3474cbc5",
     "legacy-fp:text:9f5df0b2ea93dc301ece7060",
     "legacy-fp:text:e185de7f65836ac94834e765",
@@ -19617,17 +19628,8 @@
     "legacy-fp:a776b4e86d95c7e4d17363027d93b869",
     "legacy-fp:6f910a39658104267c445f2b407212ba",
     "legacy-fp:306d08cf5835a51c48686e769306f9fb",
-    "uid:440d75b763a80e0f9253fea6",
-    "url:440d75b763a80e0f9253fea66a7de320",
-    "author-text:truong du lich - dai hoc duy tan:108a75d8b4cdc7e9fecafe71ca3f065c",
-    "author-loose:truong du lich - dai hoc duy tan:9e5d4ca6258affa47d3e917bfab137d7",
-    "author-firstline:truong du lich - dai hoc duy tan:4d0761aaf9154d7abf053e62fd909c05",
-    "author-image:truong du lich - dai hoc duy tan:23ad9001f82e80dabcabe473c18a860a",
-    "uid:38a171e1705b47688663fcb4",
-    "url:38a171e1705b47688663fcb43bdc9a45",
-    "author-text:tuoi tre truong kinh te - dai hoc duy tan:2055fb35a74d7b06581684ab7c4f6a6b",
-    "author-loose:tuoi tre truong kinh te - dai hoc duy tan:8635c7603ff97835a711dedd52364ed8",
-    "author-firstline:tuoi tre truong kinh te - dai hoc duy tan:c8b540a83ad4d61b18423d1f3c58c468"
+    "legacy-fp:108a75d8b4cdc7e9fecafe71ca3f065c",
+    "legacy-fp:2055fb35a74d7b06581684ab7c4f6a6b"
   ],
   "fingerprints": [
     "text:feb4ad672c76949c3474cbc5",
@@ -95266,5 +95268,5 @@
       "seenAt": "2026-11-27T04:41:42.368Z"
     }
   ],
-  "updatedAt": "2026-11-27T04:41:42.374Z"
+  "updatedAt": "2026-11-27T06:40:37.174Z"
 }
